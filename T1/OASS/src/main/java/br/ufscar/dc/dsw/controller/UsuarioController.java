@@ -109,7 +109,7 @@ public class UsuarioController extends HttpServlet {
         String senha = request.getParameter("senha");
         String papel = request.getParameter("papel");
 
-        Usuario usuario = new Usuario(cpf, nome, email, senha, papel);
+        Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
         dao.update(usuario);
         response.sendRedirect("lista");
     }

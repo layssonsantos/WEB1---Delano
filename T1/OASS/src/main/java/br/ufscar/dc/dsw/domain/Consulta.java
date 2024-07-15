@@ -25,6 +25,10 @@ public class Consulta {
         this.CPFProfissional = CPFProfissional;
     }
 
+    public Consulta(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

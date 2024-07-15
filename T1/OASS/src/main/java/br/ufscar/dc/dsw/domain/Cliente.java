@@ -15,6 +15,10 @@ public class Cliente {
         this.dataDeNascimento = dataDeNascimento;
     }
 
+    public Cliente(Long CPF) {
+        this.CPF = CPF;
+    }
+
     public Long getCPF() {
         return CPF;
     }

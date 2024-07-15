@@ -143,4 +143,12 @@ public class ConsultaController extends HttpServlet {
 
     public static java.sql.Time convertStringToTime(String timeString) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        try
+        try {
+            java.util.Date parsedTime = timeFormat.parse(timeString);
+            return new java.sql.Time(parsedTime.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

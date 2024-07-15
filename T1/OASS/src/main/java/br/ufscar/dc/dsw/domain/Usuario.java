@@ -15,6 +15,10 @@ public class Usuario {
         this.papel = papel;
     }
 
+    public Usuario(Long CPF) {
+        this.CPF = CPF;
+    }
+
     public String getNome() {
         return nome;
     }
