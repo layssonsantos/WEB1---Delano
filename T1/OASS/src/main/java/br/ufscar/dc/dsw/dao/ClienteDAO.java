@@ -11,18 +11,17 @@ import java.util.List;
 public class ClienteDAO extends GenericDAO {
 
     public void insert(Cliente cliente) {
-        String sql = "INSERT INTO Cliente (name, email, senha, CPF, telefone, sexo, dataDeNascimento) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Cliente (CPF, telefone, sexo, dataDeNascimento) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, cliente.getName());
-            statement.setString(2, cliente.getEmail());
-            statement.setString(3, cliente.getSenha());
-            statement.setLong(4, cliente.getCPF());
-            statement.setLong(5, cliente.getTelefone());
-            statement.setString(6, cliente.getSexo());
-            statement.setDate(7, cliente.getDataDeNascimento());
+
+            statement.setLong(1, cliente.getCPF());
+            statement.setLong(2, cliente.getTelefone());
+            statement.setString(3, cliente.getSexo());
+            statement.setDate(4, new java.sql.Date(cliente.getDataDeNascimento().getTime()));
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -37,59 +36,59 @@ public class ClienteDAO extends GenericDAO {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                String name = resultSet.getString("name");
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                Long CPF = resultSet.getLong("CPF");
+                Long cpf = resultSet.getLong("CPF");
                 Long telefone = resultSet.getLong("telefone");
                 String sexo = resultSet.getString("sexo");
-                Date dataDeNascimento = resultSet.getDate("dataDeNascimento");
-                Cliente cliente = new Cliente(name, email, senha, CPF, telefone, sexo, dataDeNascimento);
+                java.util.Date dataDeNascimento = resultSet.getDate("dataDeNascimento");
+
+                Cliente cliente = new Cliente(cpf, telefone, sexo, dataDeNascimento);
                 listaClientes.add(cliente);
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return listaClientes;
     }
 
-    public Cliente get(Long CPF) {
+    public Cliente get(Long cpf) {
         Cliente cliente = null;
         String sql = "SELECT * FROM Cliente WHERE CPF = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setLong(1, CPF);
+
+            statement.setLong(1, cpf);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    String name = resultSet.getString("name");
-                    String email = resultSet.getString("email");
-                    String senha = resultSet.getString("senha");
                     Long telefone = resultSet.getLong("telefone");
                     String sexo = resultSet.getString("sexo");
-                    Date dataDeNascimento = resultSet.getDate("dataDeNascimento");
-                    cliente = new Cliente(name, email, senha, CPF, telefone, sexo, dataDeNascimento);
+                    java.util.Date dataDeNascimento = resultSet.getDate("dataDeNascimento");
+
+                    cliente = new Cliente(cpf, telefone, sexo, dataDeNascimento);
                 }
             }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
         return cliente;
     }
 
     public void update(Cliente cliente) {
-        String sql = "UPDATE Cliente SET name = ?, email = ?, senha = ?, telefone = ?, sexo = ?, dataDeNascimento = ? WHERE CPF = ?";
+        String sql = "UPDATE Cliente SET telefone = ?, sexo = ?, dataDeNascimento = ? WHERE CPF = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-            statement.setString(1, cliente.getName());
-            statement.setString(2, cliente.getEmail());
-            statement.setString(3, cliente.getSenha());
-            statement.setLong(4, cliente.getTelefone());
-            statement.setString(5, cliente.getSexo());
-            statement.setDate(6, cliente.getDataDeNascimento());
-            statement.setLong(7, cliente.getCPF());
+
+            statement.setLong(1, cliente.getTelefone());
+            statement.setString(2, cliente.getSexo());
+            statement.setDate(3, new java.sql.Date(cliente.getDataDeNascimento().getTime()));
+            statement.setLong(4, cliente.getCPF());
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -100,8 +99,10 @@ public class ClienteDAO extends GenericDAO {
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
+
             statement.setLong(1, cliente.getCPF());
             statement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

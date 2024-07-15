@@ -1,10 +1,8 @@
 package br.ufscar.dc.dsw.controller;
 
-import br.ufscar.dc.dsw.dao.ClienteDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.domain.Usuario;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/clientes/*")
-public class ClienteController extends HttpServlet {
+@WebServlet(urlPatterns = "/usuarios/*")
+public class UsuarioController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private ClienteDAO dao;
+    private UsuarioDAO dao;
 
     @Override
     public void init() {
-        dao = new ClienteDAO();
+        dao = new UsuarioDAO();
     }
 
     @Override
@@ -67,39 +65,38 @@ public class ClienteController extends HttpServlet {
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Cliente> listaClientes = dao.getAll();
-        request.setAttribute("listaClientes", listaClientes);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/lista.jsp");
+        List<Usuario> listaUsuarios = dao.getAll();
+        request.setAttribute("listaUsuarios", listaUsuarios);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/lista.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Long cpf = Long.parseLong(request.getParameter("CPF"));
-        Cliente cliente = dao.get(cpf);
-        request.setAttribute("cliente", cliente);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/cliente/formulario.jsp");
+        Usuario usuario = dao.get(cpf);
+        request.setAttribute("usuario", usuario);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
         Long cpf = Long.parseLong(request.getParameter("CPF"));
-        Long telefone = Long.parseLong(request.getParameter("telefone"));
-        String sexo = request.getParameter("sexo");
-        String dataString = request.getParameter("dataDeNascimento");
+        String papel = request.getParameter("papel");
 
-        java.sql.Date dataDeNascimento = convertStringToDate(dataString);
-
-        Cliente cliente = new Cliente(cpf, telefone, sexo, dataDeNascimento);
-        dao.insert(cliente);
+        Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
+        dao.insert(usuario);
         response.sendRedirect("lista");
     }
 
@@ -107,14 +104,13 @@ public class ClienteController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Long cpf = Long.parseLong(request.getParameter("CPF"));
-        Long telefone = Long.parseLong(request.getParameter("telefone"));
-        String sexo = request.getParameter("sexo");
-        String dataString = request.getParameter("dataDeNascimento");
+        String nome = request.getParameter("nome");
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        String papel = request.getParameter("papel");
 
-        java.sql.Date dataDeNascimento = convertStringToDate(dataString);
-
-        Cliente cliente = new Cliente(cpf, telefone, sexo, dataDeNascimento);
-        dao.update(cliente);
+        Usuario usuario = new Usuario(cpf, nome, email, senha, papel);
+        dao.update(usuario);
         response.sendRedirect("lista");
     }
 
@@ -122,19 +118,8 @@ public class ClienteController extends HttpServlet {
             throws IOException {
         Long cpf = Long.parseLong(request.getParameter("CPF"));
 
-        Cliente cliente = new Cliente(cpf);
-        dao.delete(cliente);
+        Usuario usuario = new Usuario(cpf);
+        dao.delete(usuario);
         response.sendRedirect("lista");
-    }
-
-    public static java.sql.Date convertStringToDate(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.util.Date parsedDate = dateFormat.parse(dateString);
-            return new java.sql.Date(parsedDate.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }
