@@ -67,13 +67,13 @@ public class UsuarioController extends HttpServlet {
             throws ServletException, IOException {
         List<Usuario> listaUsuarios = dao.getAll();
         request.setAttribute("listaUsuarios", listaUsuarios);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/lista.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -82,7 +82,7 @@ public class UsuarioController extends HttpServlet {
         Long cpf = Long.parseLong(request.getParameter("CPF"));
         Usuario usuario = dao.get(cpf);
         request.setAttribute("usuario", usuario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/usuario/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/formulario.jsp");
         dispatcher.forward(request, response);
     }
 

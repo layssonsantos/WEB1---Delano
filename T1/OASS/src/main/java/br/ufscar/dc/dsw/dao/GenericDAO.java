@@ -28,7 +28,7 @@ abstract public class GenericDAO {
     	
     	/* Conexão banco de dados MySQL */
         
-    	String url = "jdbc:mysql://localhost:3306/Loja?useTimezone=true&serverTimezone=America/Sao_Paulo";
+    	String url = "jdbc:mysql://localhost:3306/OASS?useTimezone=true&serverTimezone=America/Sao_Paulo";
     	
         return DriverManager.getConnection(url, "root", "Da120903");
     }

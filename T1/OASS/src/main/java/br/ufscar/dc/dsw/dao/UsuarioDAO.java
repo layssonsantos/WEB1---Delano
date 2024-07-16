@@ -30,7 +30,7 @@ public class UsuarioDAO extends GenericDAO {
 
     public List<Usuario> getAll() {
         List<Usuario> listaUsuarios = new ArrayList<>();
-        String sql = "SELECT * FROM Usuario";
+        String sql = "SELECT * FROM Usuario ORDER BY nome";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql);
@@ -40,10 +40,10 @@ public class UsuarioDAO extends GenericDAO {
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                Long cpf = resultSet.getLong("CPF");
+                Long CPF = resultSet.getLong("CPF");
                 String papel = resultSet.getString("papel");
 
-                Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
+                Usuario usuario = new Usuario(nome, email, senha, CPF, papel);
                 listaUsuarios.add(usuario);
             }
 

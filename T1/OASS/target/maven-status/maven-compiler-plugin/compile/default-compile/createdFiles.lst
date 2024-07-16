@@ -1,0 +1,12 @@
+br\ufscar\dc\dsw\domain\Cliente.class
+br\ufscar\dc\dsw\dao\UsuarioDAO.class
+br\ufscar\dc\dsw\domain\Profissional.class
+br\ufscar\dc\dsw\controller\ConsultaController.class
+br\ufscar\dc\dsw\domain\Usuario.class
+br\ufscar\dc\dsw\controller\UsuarioController.class
+br\ufscar\dc\dsw\domain\Consulta.class
+br\ufscar\dc\dsw\dao\ProfissionalDAO.class
+br\ufscar\dc\dsw\controller\ClienteController.class
+br\ufscar\dc\dsw\dao\ConsultaDAO.class
+br\ufscar\dc\dsw\dao\GenericDAO.class
+br\ufscar\dc\dsw\dao\ClienteDAO.class
