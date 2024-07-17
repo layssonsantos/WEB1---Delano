@@ -31,9 +31,9 @@
                     <td>${usuario.email}</td>
                     <td>${usuario.papel}</td>
                     
-                        <a href="${requestScope.contextPath}/usuarios/edicao?cpf=${usuario.cpf}">Editar</a>
+                        <a href="${requestScope.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
                         &nbsp;&nbsp;&nbsp;
-                        <a href="${requestScope.contextPath}/usuarios/remocao?cpf=${usuario.cpf}"
+                        <a href="${requestScope.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"
                            onclick="return confirm('Tem certeza de que deseja excluir este usuário?');">Excluir</a>
                     </td>
                 </tr>
