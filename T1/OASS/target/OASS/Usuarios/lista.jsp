@@ -30,7 +30,7 @@
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
                     <td>${usuario.papel}</td>
-                    
+                    <td>
                         <a href="${requestScope.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
                         &nbsp;&nbsp;&nbsp;
                         <a href="${requestScope.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"

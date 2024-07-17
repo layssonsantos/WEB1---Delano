@@ -1,43 +1,31 @@
-drop database if exists OASS;
+DROP DATABASE IF EXISTS OASS;
 
-create database OASS;
+CREATE DATABASE OASS;
 
-use OASS;
+USE OASS;
 
-create table Usuario (
-    nome varchar(100) not null,
-    email varchar(100) not null,
-    senha varchar(50) not null,
-    CPF bigint not null,
-    papel varchar(10) not null,
-    primary key (CPF)
+CREATE TABLE Usuario (
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(50) NOT NULL,
+    CPF BIGINT NOT NULL,
+    papel VARCHAR(30) NOT NULL,
+    telefone BIGINT,
+    sexo VARCHAR(1),
+    dataDeNascimento DATE,
+    especialidade VARCHAR(100),
+    PRIMARY KEY (CPF)
 );
 
-create table Cliente (
-    CPF bigint not null,
-    telefone bigint not null,
-    sexo varchar(1) not null,
-    dataDeNascimento date not null,
-    primary key (CPF)
-    foreign key (CPF) references Usuario(CPF)
+CREATE TABLE Consulta (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    data DATE NOT NULL,
+    hora TIME NOT NULL,
+    CPFCliente BIGINT NOT NULL,
+    CPFProfissional BIGINT NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (CPFCliente) REFERENCES Usuario(CPF),
+    FOREIGN KEY (CPFProfissional) REFERENCES Usuario(CPF)
 );
 
-create table Profissional (
-    CPF bigint not null,
-    especialidade varchar(100) not null,
-    primary key (CPF)
-    foreign key (CPF) references Usuario(CPF)
-);
-
-create table Cunsulta (
-    id bigint not null auto_increment,
-    data date not null,
-    hora time not null,
-    CPFCliente bigint not null,
-    CPFProfissional bigint not null,
-    primary key (id),
-    foreign key (CPFCliente) references Cliente(CPF),
-    foreign key (CPFProfissional) references Profissional(CPF)
-);
-
-insert into Usuario values ('ADMIN', 'ADMIN', 'ADMIN', 12345678901, 'ADMIN');
+INSERT INTO Usuario (nome, email, senha, CPF, papel) VALUES ('ADMIN', 'ADMIN', 'ADMIN', 12345678901, 'ADMIN');

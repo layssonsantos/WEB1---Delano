@@ -23,7 +23,7 @@
         </c:choose>
     </caption>
     <c:if test="${usuario != null}">
-        <input type="hidden" name="id" value="${usuario.id}" />
+        <input type="hidden" name="CPF" value="${usuario.CPF}" />
     </c:if>
     <tr>
         <td><label for="nome">Nome:</label></td>
@@ -38,8 +38,8 @@
         <td><input type="password" id="senha" name="senha" required value="${usuario.senha}" /></td>
     </tr>
     <tr>
-        <td><label for="cpf">CPF:</label></td>
-        <td><input type="text" id="cpf" name="cpf" required value="${usuario.cpf}" /></td>
+        <td><label for="CPF">CPF:</label></td>
+        <td><input type="text" id="CPF" name="CPF" required value="${usuario.CPF}" /></td>
     </tr>
     <tr>
         <td><label for="papel">Papel:</label></td>
@@ -74,7 +74,7 @@
             <td><label for="dataDeNascimento">Data de Nascimento:</label></td>
             <td>
                 <c:set var="formattedDate">
-                    <fmt:formatDate value="${cliente.dataDeNascimento}" pattern="yyyy-MM-dd" />
+                    <fmt:formatDate value="${cliente.dataDeNascimento}" pattern="dd-MM-yyyy" />
                 </c:set>
                 <input type="date" id="dataDeNascimento" name="dataDeNascimento" value="${formattedDate}" />
             </td>

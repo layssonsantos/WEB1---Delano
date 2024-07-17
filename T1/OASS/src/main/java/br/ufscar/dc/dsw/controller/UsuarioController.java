@@ -3,6 +3,8 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -96,6 +98,21 @@ public class UsuarioController extends HttpServlet {
         String papel = request.getParameter("papel");
 
         Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
+
+        if (papel.equals("CLIENTE") || papel.equals("AMBOS")) {
+            Long telefone = Long.parseLong(request.getParameter("telefone"));
+            String sexo = request.getParameter("sexo");
+            LocalDate dataDeNascimento = LocalDate.parse(request.getParameter("dataDeNascimento"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            usuario.setTelefone(telefone);
+            usuario.setSexo(sexo);
+            usuario.setDataDeNascimento(dataDeNascimento);
+        }
+
+        if (papel.equals("PROFISSIONAL") || papel.equals("AMBOS")) {
+            String especialidade = request.getParameter("especialidade");
+            usuario.setEspecialidade(especialidade);
+        }
+
         dao.insert(usuario);
         response.sendRedirect("lista");
     }
@@ -110,6 +127,21 @@ public class UsuarioController extends HttpServlet {
         String papel = request.getParameter("papel");
 
         Usuario usuario = new Usuario(nome, email, senha, cpf, papel);
+
+        if (papel.equals("CLIENTE") || papel.equals("AMBOS")) {
+            Long telefone = Long.parseLong(request.getParameter("telefone"));
+            String sexo = request.getParameter("sexo");
+            LocalDate dataDeNascimento = LocalDate.parse(request.getParameter("dataDeNascimento"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            usuario.setTelefone(telefone);
+            usuario.setSexo(sexo);
+            usuario.setDataDeNascimento(dataDeNascimento);
+        }
+
+        if (papel.equals("PROFISSIONAL") || papel.equals("AMBOS")) {
+            String especialidade = request.getParameter("especialidade");
+            usuario.setEspecialidade(especialidade);
+        }
+
         dao.update(usuario);
         response.sendRedirect("lista");
     }

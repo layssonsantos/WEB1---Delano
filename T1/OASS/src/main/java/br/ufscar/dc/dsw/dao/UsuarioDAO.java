@@ -11,7 +11,7 @@ import java.util.List;
 public class UsuarioDAO extends GenericDAO {
 
     public void insert(Usuario usuario) {
-        String sql = "INSERT INTO Usuario (nome, email, senha, CPF, papel) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Usuario (nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento, especialidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -21,10 +21,29 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(3, usuario.getSenha());
             statement.setLong(4, usuario.getCPF());
             statement.setString(5, usuario.getPapel());
+            setOptionalParameters(statement, usuario);
             statement.executeUpdate();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void setOptionalParameters(PreparedStatement statement, Usuario usuario) throws SQLException {
+        if ("CLIENTE".equals(usuario.getPapel()) || "AMBOS".equals(usuario.getPapel())) {
+            statement.setLong(6, usuario.getTelefone());
+            statement.setString(7, usuario.getSexo());
+            statement.setDate(8, usuario.getDataDeNascimento() != null ? java.sql.Date.valueOf(usuario.getDataDeNascimento()) : null);
+        } else {
+            statement.setNull(6, java.sql.Types.BIGINT);
+            statement.setNull(7, java.sql.Types.VARCHAR);
+            statement.setNull(8, java.sql.Types.DATE);
+        }
+
+        if ("PROFISSIONAL".equals(usuario.getPapel()) || "AMBOS".equals(usuario.getPapel())) {
+            statement.setString(9, usuario.getEspecialidade());
+        } else {
+            statement.setNull(9, java.sql.Types.VARCHAR);
         }
     }
 
@@ -37,14 +56,7 @@ public class UsuarioDAO extends GenericDAO {
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                Long CPF = resultSet.getLong("CPF");
-                String papel = resultSet.getString("papel");
-
-                Usuario usuario = new Usuario(nome, email, senha, CPF, papel);
-                listaUsuarios.add(usuario);
+                listaUsuarios.add(createUsuarioFromResultSet(resultSet));
             }
 
         } catch (SQLException e) {
@@ -64,12 +76,7 @@ public class UsuarioDAO extends GenericDAO {
             statement.setLong(1, cpf);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    String nome = resultSet.getString("nome");
-                    String email = resultSet.getString("email");
-                    String senha = resultSet.getString("senha");
-                    String papel = resultSet.getString("papel");
-
-                    usuario = new Usuario(nome, email, senha, cpf, papel);
+                    usuario = createUsuarioFromResultSet(resultSet);
                 }
             }
 
@@ -80,8 +87,33 @@ public class UsuarioDAO extends GenericDAO {
         return usuario;
     }
 
+    private Usuario createUsuarioFromResultSet(ResultSet resultSet) throws SQLException {
+        String nome = resultSet.getString("nome");
+        String email = resultSet.getString("email");
+        String senha = resultSet.getString("senha");
+        Long CPF = resultSet.getLong("CPF");
+        String papel = resultSet.getString("papel");
+
+        Long telefone = resultSet.getLong("telefone");
+        String sexo = resultSet.getString("sexo");
+        java.sql.Date dataDeNascimento = resultSet.getDate("dataDeNascimento");
+        String especialidade = resultSet.getString("especialidade");
+
+        if ("ADMIN".equals(papel)) {
+            return new Usuario(nome, email, senha, CPF, papel);
+        } else if ("CLIENTE".equals(papel)) {
+            return new Usuario(nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento != null ? dataDeNascimento.toLocalDate() : null);
+        } else if ("PROFISSIONAL".equals(papel)) {
+            return new Usuario(nome, email, senha, CPF, papel, especialidade);
+        } else if ("AMBOS".equals(papel)) {
+            return new Usuario(nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento != null ? dataDeNascimento.toLocalDate() : null, especialidade);
+        } else {
+            throw new SQLException("Tipo de papel desconhecido: " + papel);
+        }
+    }
+
     public void update(Usuario usuario) {
-        String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, papel = ? WHERE CPF = ?";
+        String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, papel = ?, telefone = ?, sexo = ?, dataDeNascimento = ?, especialidade = ? WHERE CPF = ?";
 
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
@@ -90,7 +122,8 @@ public class UsuarioDAO extends GenericDAO {
             statement.setString(2, usuario.getEmail());
             statement.setString(3, usuario.getSenha());
             statement.setString(4, usuario.getPapel());
-            statement.setLong(5, usuario.getCPF());
+            setOptionalParameters(statement, usuario);
+            statement.setLong(9, usuario.getCPF());
             statement.executeUpdate();
 
         } catch (SQLException e) {
