@@ -12,40 +12,42 @@ public class UsuarioDAO extends GenericDAO {
 
     public void insert(Usuario usuario) {
         String sql = "INSERT INTO Usuario (nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento, especialidade) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+    
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-
+    
             statement.setString(1, usuario.getNome());
             statement.setString(2, usuario.getEmail());
             statement.setString(3, usuario.getSenha());
             statement.setLong(4, usuario.getCPF());
             statement.setString(5, usuario.getPapel());
-            setOptionalParameters(statement, usuario);
+            setOptionalParameters(statement, usuario, 6);
             statement.executeUpdate();
-
+    
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    
 
-    private void setOptionalParameters(PreparedStatement statement, Usuario usuario) throws SQLException {
+    private void setOptionalParameters(PreparedStatement statement, Usuario usuario, int startIndex) throws SQLException {
         if ("CLIENTE".equals(usuario.getPapel()) || "AMBOS".equals(usuario.getPapel())) {
-            statement.setLong(6, usuario.getTelefone());
-            statement.setString(7, usuario.getSexo());
-            statement.setDate(8, usuario.getDataDeNascimento() != null ? java.sql.Date.valueOf(usuario.getDataDeNascimento()) : null);
+            statement.setLong(startIndex, usuario.getTelefone());
+            statement.setString(startIndex + 1, usuario.getSexo());
+            statement.setDate(startIndex + 2, usuario.getDataDeNascimento() != null ? java.sql.Date.valueOf(usuario.getDataDeNascimento()) : null);
         } else {
-            statement.setNull(6, java.sql.Types.BIGINT);
-            statement.setNull(7, java.sql.Types.VARCHAR);
-            statement.setNull(8, java.sql.Types.DATE);
+            statement.setNull(startIndex, java.sql.Types.BIGINT);
+            statement.setNull(startIndex + 1, java.sql.Types.VARCHAR);
+            statement.setNull(startIndex + 2, java.sql.Types.DATE);
         }
-
+    
         if ("PROFISSIONAL".equals(usuario.getPapel()) || "AMBOS".equals(usuario.getPapel())) {
-            statement.setString(9, usuario.getEspecialidade());
+            statement.setString(startIndex + 3, usuario.getEspecialidade());
         } else {
-            statement.setNull(9, java.sql.Types.VARCHAR);
+            statement.setNull(startIndex + 3, java.sql.Types.VARCHAR);
         }
     }
+    
 
     public List<Usuario> getAll() {
         List<Usuario> listaUsuarios = new ArrayList<>();
@@ -114,22 +116,23 @@ public class UsuarioDAO extends GenericDAO {
 
     public void update(Usuario usuario) {
         String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ?, papel = ?, telefone = ?, sexo = ?, dataDeNascimento = ?, especialidade = ? WHERE CPF = ?";
-
+    
         try (Connection conn = this.getConnection();
              PreparedStatement statement = conn.prepareStatement(sql)) {
-
+    
             statement.setString(1, usuario.getNome());
             statement.setString(2, usuario.getEmail());
             statement.setString(3, usuario.getSenha());
             statement.setString(4, usuario.getPapel());
-            setOptionalParameters(statement, usuario);
+            setOptionalParameters(statement, usuario, 5);
             statement.setLong(9, usuario.getCPF());
             statement.executeUpdate();
-
+    
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    
 
     public void delete(Usuario usuario) {
         String sql = "DELETE FROM Usuario WHERE CPF = ?";

@@ -31,10 +31,12 @@
                     <td>${usuario.email}</td>
                     <td>${usuario.papel}</td>
                     <td>
-                        <a href="${requestScope.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
-                        &nbsp;&nbsp;&nbsp;
-                        <a href="${requestScope.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"
-                           onclick="return confirm('Tem certeza de que deseja excluir este usuário?');">Excluir</a>
+                        <c:if test="${usuario.CPF != 0}">
+                            <a href="${pageContext.request.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="${pageContext.request.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"
+                               onclick="return confirm('Tem certeza de que deseja excluir este usuário?');">Excluir</a>
+                        </c:if>
                     </td>
                 </tr>
             </c:forEach>
