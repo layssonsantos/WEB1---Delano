@@ -22,6 +22,10 @@
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th>Papel</th>
+                <th>Telefone</th>
+                <th>Sexo</th>
+                <th>Data de Nascimento</th>
+                <th>Especialidade</th>
                 <th>Ações</th>
             </tr>
             <c:forEach var="usuario" items="${requestScope.listaUsuarios}">
@@ -30,6 +34,10 @@
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
                     <td>${usuario.papel}</td>
+                    <td>${usuario.telefone != null ? usuario.telefone : "NULL"}</td>
+                    <td>${usuario.sexo != null ? usuario.sexo : "NULL"}</td>
+                    <td>${usuario.dataDeNascimento != null ? usuario.dataDeNascimento : "NULL"}</td>
+                    <td>${usuario.especialidade != null ? usuario.especialidade : "NULL"}</td>
                     <td>
                         <c:if test="${usuario.CPF != 0}">
                             <a href="${pageContext.request.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
