@@ -19,8 +19,7 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Consulta (
     id BIGINT NOT NULL AUTO_INCREMENT,
-    data DATE NOT NULL,
-    hora TIME NOT NULL,
+    dataHora DATETIME NOT NULL,
     CPFCliente BIGINT NOT NULL,
     CPFProfissional BIGINT NOT NULL,
     PRIMARY KEY (id),
@@ -32,4 +31,4 @@ INSERT INTO Usuario (nome, email, senha, CPF, papel) VALUES ('ADMIN', 'ADMIN@ADM
 INSERT INTO Usuario (nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento) VALUES ('CLIENTE', 'CLIENTE@CLIENTE', 'CLIENTE', 1, 'CLIENTE', 123456789, 'M', '1999-01-01');
 INSERT INTO Usuario (nome, email, senha, CPF, papel, especialidade) VALUES ('PROFISSIONAL', 'PROFISSIONAL@PROFISSIONAL', 'PROFISSIONAL', 2, 'PROFISSIONAL', 'MEDICO');
 INSERT INTO Usuario (nome, email, senha, CPF, papel, telefone, sexo, dataDeNascimento, especialidade) VALUES ('AMBOS', 'AMBOS@AMBOS', 'AMBOS', 3, 'AMBOS', 123456789, 'M', '1999-01-01', 'Advogado');
-INSERT INTO Consulta (data, hora, CPFCliente, CPFProfissional) VALUES ('2021-06-01', '10:00:00', 1, 2);
+INSERT INTO Consulta (dataHora, CPFCliente, CPFProfissional) VALUES ('2021-06-01 10:00:00', 1, 2);

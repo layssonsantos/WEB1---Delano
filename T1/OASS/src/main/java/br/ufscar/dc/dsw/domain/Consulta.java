@@ -1,34 +1,34 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Consulta {
+
     private Long id;
-    private Date data;
-    private Time hora;
+    private LocalDateTime dataHora;
     private Long CPFCliente;
     private Long CPFProfissional;
 
-    public Consulta(Long id, Date data, Time hora, Long CPFCliente, Long CPFProfissional) {
+    // Construtor padrão
+    public Consulta() {
+    }
+
+    // Construtor com todos os campos
+    public Consulta(Long id, LocalDateTime dataHora, Long CPFCliente, Long CPFProfissional) {
         this.id = id;
-        this.data = data;
-        this.hora = hora;
+        this.dataHora = dataHora;
         this.CPFCliente = CPFCliente;
         this.CPFProfissional = CPFProfissional;
     }
 
-    public Consulta(Date data, Time hora, Long CPFCliente, Long CPFProfissional) {
-        this.data = data;
-        this.hora = hora;
+    // Construtor sem o campo id
+    public Consulta(LocalDateTime dataHora, Long CPFCliente, Long CPFProfissional) {
+        this.dataHora = dataHora;
         this.CPFCliente = CPFCliente;
         this.CPFProfissional = CPFProfissional;
     }
 
-    public Consulta(Long id) {
-        this.id = id;
-    }
-
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -37,20 +37,12 @@ public class Consulta {
         this.id = id;
     }
 
-    public Date getData() {
-        return data;
+    public LocalDateTime getDataHora() {
+        return dataHora;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Time getHora() {
-        return hora;
-    }
-
-    public void setHora(Time hora) {
-        this.hora = hora;
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
     }
 
     public Long getCPFCliente() {

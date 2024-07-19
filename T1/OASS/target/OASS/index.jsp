@@ -18,9 +18,9 @@
 <body>
     <div class="center">
         <h2>Bem-vindo ao Sistema OASS</h2>
-        <p>Escolha uma das opções:</p>
         <ul>
-            <li><a href="usuarios">CRUD Usuarios</a></li>
+            <li><a href="consultas">CRUD consultas</a></li>
+            <li><a href="usuarios">Reserve sua consulta agora!</a></li>
             <li><a href="usuarios/cadastro">Cadastrar Novo Usuário</a></li>
         </ul>
     </div>

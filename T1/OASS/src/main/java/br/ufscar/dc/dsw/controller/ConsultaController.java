@@ -3,8 +3,8 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.ConsultaDAO;
 import br.ufscar.dc.dsw.domain.Consulta;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -69,13 +69,13 @@ public class ConsultaController extends HttpServlet {
             throws ServletException, IOException {
         List<Consulta> listaConsultas = dao.getAll();
         request.setAttribute("listaConsultas", listaConsultas);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/consulta/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Consultas/lista.jsp");
         dispatcher.forward(request, response);
     }
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/consulta/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Consultas/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -84,22 +84,18 @@ public class ConsultaController extends HttpServlet {
         Long id = Long.parseLong(request.getParameter("id"));
         Consulta consulta = dao.get(id);
         request.setAttribute("consulta", consulta);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/consulta/formulario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Consultas/formulario.jsp");
         dispatcher.forward(request, response);
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-        String dataString = request.getParameter("data");
-        String horaString = request.getParameter("hora");
-        Long cpfCliente = Long.parseLong(request.getParameter("CPFCliente"));
-        Long cpfProfissional = Long.parseLong(request.getParameter("CPFProfissional"));
+        LocalDateTime dataHora = LocalDateTime.parse(request.getParameter("dataHora"), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        Long CPFCliente = Long.parseLong(request.getParameter("CPFCliente"));
+        Long CPFProfissional = Long.parseLong(request.getParameter("CPFProfissional"));
 
-        java.sql.Date data = convertStringToDate(dataString);
-        java.sql.Time hora = convertStringToTime(horaString);
-
-        Consulta consulta = new Consulta(data, hora, cpfCliente, cpfProfissional);
+        Consulta consulta = new Consulta(dataHora, CPFCliente, CPFProfissional);
         dao.insert(consulta);
         response.sendRedirect("lista");
     }
@@ -108,15 +104,11 @@ public class ConsultaController extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         Long id = Long.parseLong(request.getParameter("id"));
-        String dataString = request.getParameter("data");
-        String horaString = request.getParameter("hora");
-        Long cpfCliente = Long.parseLong(request.getParameter("CPFCliente"));
-        Long cpfProfissional = Long.parseLong(request.getParameter("CPFProfissional"));
+        LocalDateTime dataHora = LocalDateTime.parse(request.getParameter("dataHora"), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
+        Long CPFCliente = Long.parseLong(request.getParameter("CPFCliente"));
+        Long CPFProfissional = Long.parseLong(request.getParameter("CPFProfissional"));
 
-        java.sql.Date data = convertStringToDate(dataString);
-        java.sql.Time hora = convertStringToTime(horaString);
-
-        Consulta consulta = new Consulta(id, data, hora, cpfCliente, cpfProfissional);
+        Consulta consulta = new Consulta(id, dataHora, CPFCliente, CPFProfissional);
         dao.update(consulta);
         response.sendRedirect("lista");
     }
@@ -124,31 +116,7 @@ public class ConsultaController extends HttpServlet {
     private void remove(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-
-        Consulta consulta = new Consulta(id);
-        dao.delete(consulta);
+        dao.delete(id);
         response.sendRedirect("lista");
-    }
-
-    public static java.sql.Date convertStringToDate(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.util.Date parsedDate = dateFormat.parse(dateString);
-            return new java.sql.Date(parsedDate.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public static java.sql.Time convertStringToTime(String timeString) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        try {
-            java.util.Date parsedTime = timeFormat.parse(timeString);
-            return new java.sql.Time(parsedTime.getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 }

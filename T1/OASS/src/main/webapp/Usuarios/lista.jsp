@@ -34,10 +34,10 @@
                     <td>${usuario.nome}</td>
                     <td>${usuario.email}</td>
                     <td>${usuario.papel}</td>
-                    <td>${usuario.telefone != null ? usuario.telefone : "NULL"}</td>
-                    <td>${usuario.sexo != null ? usuario.sexo : "NULL"}</td>
-                    <td>${usuario.dataDeNascimento != null ? usuario.dataDeNascimento : "NULL"}</td>
-                    <td>${usuario.especialidade != null ? usuario.especialidade : "NULL"}</td>
+                    <td>${usuario.telefone}</td>
+                    <td>${usuario.sexo}</td>
+                    <td>${usuario.dataDeNascimento}</td>
+                    <td>${usuario.especialidade}</td>
                     <td>
                         <c:if test="${usuario.CPF != 0}">
                             <a href="${pageContext.request.contextPath}/usuarios/edicao?CPF=${usuario.CPF}">Editar</a>
