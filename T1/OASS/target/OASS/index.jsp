@@ -10,29 +10,29 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-            background-color: #f0f0f0; /* Fundo leve para destacar os textos */
+            background-color: #f0f0f0; 
         }
         .center {
             text-align: center;
         }
         .highlight {
-            color: #333; /* Cor do texto */
-            font-weight: bold; /* Texto em negrito */
-            margin: 20px 0; /* Margem para separar os elementos */
+            color: #333; 
+            font-weight: bold; 
+            margin: 20px 0; 
         }
         .welcome {
-            color: #350e00; /* Cor chamativa */
-            font-size: 2em; /* Aumenta o tamanho do texto */
-            text-shadow: 2px 2px 4px #aaa; /* Adiciona sombra ao texto */
+            color: #350e00; 
+            font-size: 2em; 
+            text-shadow: 2px 2px 4px #aaa; 
             margin: 20px 0;
         }
         a {
-            color: #007bff; /* Cor dos links */
-            text-decoration: none; /* Remove o sublinhado dos links */
-            font-weight: bold; /* Links em negrito */
+            color: #007bff; 
+            text-decoration: none; 
+            font-weight: bold; 
         }
         a:hover {
-            text-decoration: underline; /* Sublinhado ao passar o mouse */
+            text-decoration: underline; 
         }
     </style>
 </head>
