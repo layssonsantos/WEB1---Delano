@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="title.consultationList"/></title>
     <meta charset="UTF-8">
-    <title><fmt:message key="title.consultationList"/></title>
+    <title> Lista de Consultas </title>
 </head>
 <body>
     <fmt:bundle basename="messages">
