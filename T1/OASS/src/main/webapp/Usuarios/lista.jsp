@@ -10,18 +10,20 @@
     <link href="${pageContext.request.contextPath}/layout.css" rel="stylesheet" type="text/css"/>
     <script>
         function toggleSpecialtyFilter() {
+            var specialtyFilter = document.getElementById("specialtyFilter");
             var allUsersTable = document.getElementById("allUsersTable");
             var specialtyUsersTable = document.getElementById("specialtyUsersTable");
             if (allUsersTable.style.display === "none") {
+                specialtyFilter.style.display = "none";
                 allUsersTable.style.display = "table";
                 specialtyUsersTable.style.display = "none";
             } else {
+                specialtyFilter.style.display = "block";
                 allUsersTable.style.display = "none";
                 specialtyUsersTable.style.display = "table";
             }
         }
 
-        // Função para checar o parâmetro da url e habilitar o filtro pro usuário comum
         function checkURLParams() {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.has('filter') && urlParams.get('filter') === 'specialty') {
@@ -30,6 +32,26 @@
         }
 
         window.onload = checkURLParams;
+
+        function filterSpecialty() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("specialtyInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("specialtyUsersTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        }
     </script>
 </head>
 <body>
@@ -71,20 +93,22 @@
                             <c:if test="${usuario.CPF != 0}">
                                 <a href="${pageContext.request.contextPath}/usuarios/edicao?CPF=${usuario.CPF}"><fmt:message key="action.edit"/></a>
                                 &nbsp;&nbsp;&nbsp;
-                                <a href="${pageContext.request.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"
-                                   onclick="return confirm(<fmt:message key='confirm.deleteUser'/>);"><fmt:message key="action.delete"/></a>
+                                <a href="${pageContext.request.contextPath}/usuarios/remocao?CPF=${usuario.CPF}"><fmt:message key="action.delete"/></a>
                             </c:if>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
 
+            <div id="specialtyFilter" style="display:none;">
+                <input type="text" id="specialtyInput" onkeyup="filterSpecialty()" placeholder="Filtrar por especialidade">
+            </div>
+
             <table id="specialtyUsersTable" border="1" style="display:none">
                 <h3><caption><fmt:message key="caption.specialtyProfessionals"/></caption></h3>
                 <tr>
                     <th><fmt:message key="column.name"/></th>
                     <th><fmt:message key="column.email"/></th>
-                    <th><fmt:message key="column.role"/></th>
                     <th><fmt:message key="column.specialty"/></th>
                 </tr>
                 <c:forEach var="usuario" items="${requestScope.listaUsuarios}">
@@ -92,7 +116,6 @@
                         <tr>
                             <td>${usuario.nome}</td>
                             <td>${usuario.email}</td>
-                            <td>${usuario.papel}</td>
                             <td>${usuario.especialidade}</td>
                         </tr>
                     </c:if>

@@ -30,7 +30,7 @@ abstract public class GenericDAO {
         
         
     	String url = "jdbc:mysql://localhost/OASS?serverTimezone=UTC"; //Localhost - Laysson
-    	return DriverManager.getConnection(url, "root", "laysson");
+    	return DriverManager.getConnection(url, "root", "Da120903");
         
         /*String url = "jdbc:mysql://localhost:3306/OASS?useTimezone=true&serverTimezone=America/Sao_Paulo"; //Localhost - Padrão
     	
