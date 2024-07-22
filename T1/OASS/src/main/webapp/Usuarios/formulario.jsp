@@ -14,7 +14,7 @@
         <div align="center">
             <h1><fmt:message key="header.userManagement"/></h1>
             <h2>
-                <a href="lista"><fmt:message key="link.userList"/></a>
+                <a href="CRUD"><fmt:message key="link.userList"/></a>
             </h2>
         </div>
         <div align="center">

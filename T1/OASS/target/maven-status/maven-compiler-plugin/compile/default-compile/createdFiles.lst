@@ -1,2 +1,3 @@
-br\ufscar\dc\dsw\domain\Usuario.class
-br\ufscar\dc\dsw\domain\Consulta.class
+br/ufscar/dc/dsw/ListFileServlet.class
+br/ufscar/dc/dsw/Constants.class
+br/ufscar/dc/dsw/UploadFileServlet.class
