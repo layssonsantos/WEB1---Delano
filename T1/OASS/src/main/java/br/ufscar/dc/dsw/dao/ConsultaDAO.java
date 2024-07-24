@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.domain.Consulta;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,6 +26,27 @@ public class ConsultaDAO extends GenericDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+     public boolean consultaExiste(LocalDateTime dataHora, Long CPFCliente, Long CPFProfissional, Consulta consulta) {
+        String sql = "SELECT * FROM Consulta WHERE dataHora = ? AND (CPFCliente = ? OR CPFProfissional = ?)";
+
+        try (Connection conn = this.getConnection();
+             PreparedStatement statement = conn.prepareStatement(sql)) {
+
+            statement.setTimestamp(1, Timestamp.valueOf(consulta.getDataHora()));
+            statement.setLong(2, consulta.getCPFCliente());
+            statement.setLong(3, consulta.getCPFProfissional());
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    return resultSet.getInt(1) > 0;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public List<Consulta> getAll() {

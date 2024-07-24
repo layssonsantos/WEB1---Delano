@@ -1,6 +1,6 @@
-package br.ufscar.dc.dsw;
+package br.ufscar.dc.dsw.controller;
 
-import static br.ufscar.dc.dsw.Constants.UPLOAD_DIRECTORY;
+import static br.ufscar.dc.dsw.controller.Constants.UPLOAD_DIRECTORY;
 
 import java.io.File;
 import java.io.IOException;

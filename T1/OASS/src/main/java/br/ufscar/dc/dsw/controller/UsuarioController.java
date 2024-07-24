@@ -56,6 +56,16 @@ public class UsuarioController extends HttpServlet {
                 case "/atualizacao":
                     atualize(request, response);
                     break;
+                case "/login":
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/login.jsp");
+                    dispatcher.forward(request, response);
+                    break;
+                case "/valida":
+                    validaLogin(request, response);
+                    break;
+                case "/home":
+                    apresentaHome(request, response);
+                    break;
                 case "/CRUD":
                     lista(request, response);
                     break;
@@ -66,6 +76,29 @@ public class UsuarioController extends HttpServlet {
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
         }
+    }
+
+    private void validaLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String email = request.getParameter("email");
+        String senha = request.getParameter("senha");
+        Usuario usuario = dao.get(email, senha);
+
+        if (usuario != null && usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)){
+            request.getSession().setAttribute("usuarioLogado", usuario);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
+            dispatcher.forward(request, response);
+        } else {
+            request.setAttribute("loginError", "Email ou senha inválidos.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
+            dispatcher.forward(request, response);
+        }
+    }
+
+    private void apresentaHome(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void upload(HttpServletRequest request, HttpServletResponse response)
@@ -128,7 +161,7 @@ public class UsuarioController extends HttpServlet {
             response.sendRedirect("UploadFile");    
         }
         else{
-            response.sendRedirect("lista");
+            response.sendRedirect("CRUD");
         }
     }
 
@@ -159,7 +192,7 @@ public class UsuarioController extends HttpServlet {
 
 
         dao.update(usuario);
-        response.sendRedirect("lista");
+        response.sendRedirect("CRUD");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
@@ -168,6 +201,6 @@ public class UsuarioController extends HttpServlet {
 
         Usuario usuario = new Usuario(cpf);
         dao.delete(usuario);
-        response.sendRedirect("lista");
+        response.sendRedirect("CRUD");
     }
 }

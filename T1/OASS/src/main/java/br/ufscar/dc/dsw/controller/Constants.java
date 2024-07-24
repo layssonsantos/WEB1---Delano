@@ -1,4 +1,4 @@
-package br.ufscar.dc.dsw;
+package br.ufscar.dc.dsw.controller;
 
 public class Constants {
 
