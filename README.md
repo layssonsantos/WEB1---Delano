@@ -21,10 +21,10 @@ Repositório para o desenvolvimento de atividades e projetos na disciplina DSW1 
 - MySQL
 
 ## Roteiro de execução:
-- SGBD: MySQL
-- Nome do Banco de Dados: OASS
-- Script sql: source db\MySQL\create.sql
-- Usuários populados: Admin, Cliente, Profissional e Ambos
+- SGBD: **MySQL**
+- Nome do Banco de Dados: **OASS**
+- Script sql: **source db\MySQL\create.sql**
+- Usuários populados: **Admin, Cliente, Profissional e Ambos**
   
 # Checklist dos requisitos (R1-R8):
 
