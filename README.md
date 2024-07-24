@@ -35,14 +35,14 @@ Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (
 ### () Implementado (X) Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ## R5: O sistema não deve permitir o cadastro de consulta de um mesmo profissional ou de um mesmo cliente em uma mesma data/horário.
-(X) Implementado ( ) Parcialmente implementado ( ) Não implementado
-### Divisão na implementação da funcionalidade: Laysson Santos da Silva (100%) 
+### (X) Implementado ( ) Parcialmente implementado ( ) Não implementado
+Divisão na implementação da funcionalidade: Laysson Santos da Silva (100%) 
 ## R6: Listagem de todas os horários de consultas de um cliente (requer login do cliente via email + senha). Depois de fazer login, o cliente pode visualizar todos os seus horários de consultas cadastrados.
-() Implementado (X) Parcialmente implementado ( ) Não implementado
-### Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
+### () Implementado (X) Parcialmente implementado ( ) Não implementado
+Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ## R7: Listagem de todas as consultas de um profissional (requer login do profissional via e-mail + senha). Depois de fazer login, o profissional pode visualizar todos os horários de atendimento cadastrados.
-() Implementado (X) Parcialmente implementado ( ) Não implementado
-### Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
+### () Implementado (X) Parcialmente implementado ( ) Não implementado
+Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ## R8: O sistema deve ser internacionalizado em pelo menos dois idiomas: português + outro de sua escolha.
-() Implementado (X) Parcialmente implementado ( ) Não implementado
-### Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
+### () Implementado (X) Parcialmente implementado ( ) Não implementado
+Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
