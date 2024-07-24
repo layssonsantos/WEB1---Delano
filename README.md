@@ -23,7 +23,7 @@ Repositório para o desenvolvimento de atividades e projetos na disciplina DSW1 
 # Checklist dos requisitos (R1-R8):
 
 ## R1: CRUD 1 de clientes (requer login de administrador)
-() Implementado (X) Parcialmente implementado ( ) Não implementado
+### () Implementado (X) Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (50%) e Gabriel Henrique Alves Zago (50%)
 ## R2: CRUD de profissionais liberais (requer login de administrador)
 () Implementado (X) Parcialmente implementado ( ) Não implementado
