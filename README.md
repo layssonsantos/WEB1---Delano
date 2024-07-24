@@ -37,8 +37,8 @@ Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ```
-## R4: Agendamento de horário de consulta com um profissional (requer login do cliente via email + senha). 
-> Ao clicar em um profissional (requisito R3), o cliente pode cadastrar uma consulta. Para isso, deve escolher uma data/horário, e deve ser gravado o horário da consulta na base de dados. O profissional e cliente devem ser informado (via e-mail) sobre o agendamento da consulta -- o link da videoconferência (google meet, zoom, etc) deve estar presente no corpo da mensagem enviada:
+## R4: Agendamento de horário de consulta com um profissional (requer login do cliente via email + senha):
+> Ao clicar em um profissional (requisito R3), o cliente pode cadastrar uma consulta. Para isso, deve escolher uma data/horário, e deve ser gravado o horário da consulta na base de dados. O profissional e cliente devem ser informado (via e-mail) sobre o agendamento da consulta -- o link da videoconferência (google meet, zoom, etc) deve estar presente no corpo da mensagem enviada.
 ```
 () Implementado (X) Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
