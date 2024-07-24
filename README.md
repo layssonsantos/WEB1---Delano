@@ -1,6 +1,25 @@
 # WEB1 - Equipe 4
 Repositório para o desenvolvimento de atividades e projetos na disciplina DSW1 (Desenvolvimento de Software para Web 1) com o professor Delano.
 
+# Projeto de Sistema para agendamento de consultas online com profissionais
+
+## Funcionalidades
+- Cadastro de Usuários (Clientes e Profissionais)
+- Login de Usuários
+- Cadastro de Consultas
+- Listagem de Consultas
+- Upload de Arquivos
+  
+## Tecnologias Utilizadas
+- Java
+- Javascript
+- CSS
+- Servlets
+- JSP
+- JSTL
+- JDBC
+- MySQL
+  
 Checklist dos requisitos (R1-R8):
 
 R1: CRUD 1 de clientes (requer login de administrador)
