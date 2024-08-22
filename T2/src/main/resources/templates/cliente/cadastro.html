@@ -11,13 +11,13 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span th:text="#{cliente.cadastrar.label}">Cadastrar Cliente</span></li>
+                        <span>Cadastrar Cliente</span></li>
                 </ul>
+                <a class="btn btn-primary btn-md" th:href="@{/clientes/listar}"
+                    role="button"> <span class="oi oi-spreadsheet" title="Listar"
+                    aria-hidden="true"></span> <span>Listar Clientes</span>
+                </a>
             </div>
-            <a class="btn btn-primary btn-md" th:href="@{/clientes/listar}"
-                role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
-                aria-hidden="true"></span> <span th:text="#{cliente.listar.label}">Listar Clientes</span>
-            </a>
         </nav>
 
         <div class="container" id="cadastro">
@@ -30,7 +30,7 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.nome.label}" for="nome">Nome</label>
+                        <label for="nome">Nome</label>
                         <input type="text" class="form-control" id="nome" placeholder="Nome"
                             autofocus="autofocus" th:field="*{nome}"
                             th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
@@ -41,7 +41,7 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.email.label}" for="email">E-mail</label>
+                        <label for="email">E-mail</label>
                         <input type="email" class="form-control" id="email" placeholder="email@example.com"
                             autofocus="autofocus" th:field="*{email}"
                             th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
@@ -52,8 +52,9 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.cpf.label}" for="CPF">CPF</label>
+                        <label for="CPF">CPF</label>
                         <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
+                            th:readonly="${cliente.id != null}"
                             autofocus="autofocus" th:field="*{CPF}"
                             th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
                             data-mask="000.000.000-00" data-mask-reverse="true" />
@@ -64,18 +65,18 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.telefone.label}" for="telefone">Telefone</label>
-                        <input type="text" class="form-control" id="telefone" placeholder="(00) 00000-0000"
-                            th:field="*{telefone}"
+                        <label for="telefone">Telefone</label>
+                        <input type="text" class="form-control" id="telefone" placeholder="Telefone"
+                            data-mask="(00) 00000-0000" th:field="*{telefone}"
                             th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
-
+                        
                         <div class="invalid-feedback">
                             <span th:errors="*{telefone}"></span>
                         </div>
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.sexo.label}" for="sexo">Sexo</label>
+                        <label for="sexo">Sexo</label>
                         <select id="sexo" class="form-control" th:field="*{sexo}"
                             th:classappend="${#fields.hasErrors('sexo')} ? is-invalid">
                             <option value="">Selecione</option>
@@ -89,8 +90,9 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label th:text="#{cliente.dataNascimento.label}" for="dataNascimento">Data de Nascimento</label>
-                        <input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"
+                        <label for="dataNascimento">Data de Nascimento</label>
+                        <input type="text" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"
+                            data-mask="00/00/0000" maxlength="10" autocomplete="off"
                             th:classappend="${#fields.hasErrors('dataNascimento')} ? is-invalid" />
 
                         <div class="invalid-feedback">
@@ -100,7 +102,7 @@
                 </div>
 
                 <input type="hidden" id="id" th:field="*{id}" />
-                <button type="submit" th:text="#{button.salvar.label}" class="btn btn-primary btn-sm">Salvar</button>
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
             </form>
         </div>
     </section>
