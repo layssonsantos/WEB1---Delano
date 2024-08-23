@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+    <section class="layout-content" layout:fragment="corpo">
+
+        <nav class="navbar navbar-expand-md bg-light">
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                        <span>Cadastrar Profissionais</span></li>
+                </ul>
+            </div>
+            <a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
+                role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+                aria-hidden="true"></span> <span>Listar Profissionais</span>
+            </a>
+        </nav>
+
+        <div class="container" id="cadastro">
+
+            <div th:replace="~{fragments/alert}"></div>
+
+            <form
+                th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
+                th:object="${profissional}" method="POST" enctype="multipart/form-data">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="nome">Nome</label> 
+                        <input type="text" class="form-control" id="nome" placeholder="Nome"
+                            autofocus="autofocus" th:field="*{nome}"
+                            th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{nome}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="email">E-mail</label> 
+                        <input type="email" class="form-control" id="email" placeholder="E-mail"
+                            th:field="*{email}"
+                            th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{email}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="CPF">CPF</label>
+                        <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
+                            th:readonly="${cliente.id != null}"
+                            autofocus="autofocus" th:field="*{CPF}"
+                            th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
+                            data-mask="000.000.000-00" data-mask-reverse="true" />
+
+                        <div class="invalid-feedback">
+                            <span th:errors="*{CPF}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="especialidade">Especialidade</label> 
+                        <input type="text" class="form-control" id="especialidade" placeholder="Especialidade"
+                            th:field="*{especialidade}"
+                            th:classappend="${#fields.hasErrors('especialidade')} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{especialidade}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="qualificacao">Qualificação (PDF, DOC, etc.)</label> 
+                        <input type="file" class="form-control-file" id="qualificacao"
+                            name="file" accept=".pdf, .doc, .docx, .odt"
+                            th:classappend="${#fields.hasErrors('qualificacao')} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{qualificacao}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" id="id" th:field="*{id}" />
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>
