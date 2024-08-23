@@ -54,7 +54,7 @@
                     <div class="form-group col-md-6">
                         <label for="CPF">CPF</label>
                         <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
-                            th:readonly="${cliente.id != null}"
+                            th:readonly="${profissional.id != null}"
                             autofocus="autofocus" th:field="*{CPF}"
                             th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
                             data-mask="000.000.000-00" data-mask-reverse="true" />
@@ -77,7 +77,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="qualificacao">Qualificação (PDF, DOC, etc.)</label> 
-                        <input type="file" name="file" accept=".pdf, .doc, .docx, .odt"/>
+                        <input type="file" class="form-control-file" name="file" accept=".pdf, .doc, .docx, .odt"/>
                     </div>
                 </div>
 

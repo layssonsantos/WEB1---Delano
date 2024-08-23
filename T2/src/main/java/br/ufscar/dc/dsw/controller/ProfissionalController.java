@@ -90,7 +90,7 @@ public class ProfissionalController {
 		Profissional profissional = profissionalService.buscarPorId(id);
 
 		// set content type
-		response.setContentType("aplplication/pdf");
+		response.setContentType("application/pdf");
 		
 		try {
 			// copies all bytes to an output stream

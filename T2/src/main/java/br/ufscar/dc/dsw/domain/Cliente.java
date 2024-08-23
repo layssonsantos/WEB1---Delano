@@ -71,8 +71,8 @@ public class Cliente extends AbstractEntity<Long> {
         return CPF;
     }
 
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
     }
 
     public String getNome() {
