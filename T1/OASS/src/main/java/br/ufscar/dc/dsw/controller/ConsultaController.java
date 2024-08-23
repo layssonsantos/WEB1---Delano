@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.ConsultaDAO;
 import br.ufscar.dc.dsw.domain.Consulta;
+import br.ufscar.dc.dsw.util.Erro;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -94,10 +95,21 @@ public class ConsultaController extends HttpServlet {
         LocalDateTime dataHora = LocalDateTime.parse(request.getParameter("dataHora"), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"));
         Long CPFCliente = Long.parseLong(request.getParameter("CPFCliente"));
         Long CPFProfissional = Long.parseLong(request.getParameter("CPFProfissional"));
-
+               
         Consulta consulta = new Consulta(dataHora, CPFCliente, CPFProfissional);
-        dao.insert(consulta);
-        response.sendRedirect("lista");
+        Erro erros = new Erro();
+        
+        if (dao.consultaExiste(dataHora, CPFCliente, CPFProfissional, consulta)) {
+            // Se existir, redirecionar para uma página de erro ou mostrar mensagem
+            erros.add("Já existe uma consulta marcada para o mesmo cliente ou profissional nesta data e horário.");
+            request.setAttribute("mensagem", erros);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/erro.jsp"); 
+            dispatcher.forward(request, response);
+        } else {
+            // Caso não exista, inserir a nova consulta
+            dao.insert(consulta);
+            response.sendRedirect("lista");
+        }
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)

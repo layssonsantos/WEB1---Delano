@@ -69,6 +69,9 @@ public class UsuarioController extends HttpServlet {
                 case "/CRUD":
                     lista(request, response);
                     break;
+                case "/UploadFile":
+                    upload(request, response);
+                    break;
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
@@ -81,12 +84,14 @@ public class UsuarioController extends HttpServlet {
         String senha = request.getParameter("senha");
         Usuario usuario = dao.get(email, senha);
 
-        if (usuario.getEmail() == email && usuario.getSenha() == senha){
+        if (usuario != null && usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)){
             request.getSession().setAttribute("usuarioLogado", usuario);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
             dispatcher.forward(request, response);
         } else {
-            response.sendRedirect("/OASS/usuarios/login");
+            request.setAttribute("loginError", "Email ou senha inválidos.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
+            dispatcher.forward(request, response);
         }
     }
 
@@ -95,6 +100,13 @@ public class UsuarioController extends HttpServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/home.jsp");
         dispatcher.forward(request, response);
     }
+
+    private void upload(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/Usuarios/upload.jsp");
+        dispatcher.forward(request, response);
+    }
+
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -145,7 +157,12 @@ public class UsuarioController extends HttpServlet {
         }
 
         dao.insert(usuario);
-        response.sendRedirect("lista");
+        if(papel.equals("PROFISSIONAL") || papel.equals("AMBOS")){
+            response.sendRedirect("UploadFile");    
+        }
+        else{
+            response.sendRedirect("CRUD");
+        }
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
@@ -173,8 +190,9 @@ public class UsuarioController extends HttpServlet {
             usuario.setEspecialidade(especialidade);
         }
 
+
         dao.update(usuario);
-        response.sendRedirect("lista");
+        response.sendRedirect("CRUD");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
@@ -183,6 +201,6 @@ public class UsuarioController extends HttpServlet {
 
         Usuario usuario = new Usuario(cpf);
         dao.delete(usuario);
-        response.sendRedirect("lista");
+        response.sendRedirect("CRUD");
     }
 }

@@ -18,7 +18,7 @@
                 <li><a href="consultas"><fmt:message key="link.consultas"/></a></li>
                 <li><a href="usuarios/login"><fmt:message key="link.reserve"/></a></li>
                 <li><a href="usuarios/cadastro"><fmt:message key="link.cadastro"/></a></li>
-                <li><a href="usuarios/listaUsuarios?filter=specialty"><fmt:message key="link.filterSpecialty"/></a></li>
+                <li><a href="usuarios/CRUD?filter=specialty"><fmt:message key="link.filterSpecialty"/></a></li>
             </ul>
         </div>
     </fmt:bundle>
