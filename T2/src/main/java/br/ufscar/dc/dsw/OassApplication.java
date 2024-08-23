@@ -81,8 +81,6 @@ public class OassApplication {
 			p3.setEspecialidade("Neurologia");
 			p3.setQualificacao(Files.readAllBytes(Path.of("carla_rodrigues_qualificacao.pdf")));
 			profissionalDAO.save(p3);
-
 		};
 	}
-
 }

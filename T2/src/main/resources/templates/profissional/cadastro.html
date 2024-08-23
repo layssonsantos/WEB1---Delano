@@ -13,11 +13,11 @@
                     <li class="nav-item active"><i class="oi oi-caret-right"></i>
                         <span>Cadastrar Profissionais</span></li>
                 </ul>
+                <a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
+                    role="button"> <span class="oi oi-spreadsheet" title="Listar"
+                    aria-hidden="true"></span> <span>Listar Profissionais</span>
+                </a>
             </div>
-            <a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}"
-                role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
-                aria-hidden="true"></span> <span>Listar Profissionais</span>
-            </a>
         </nav>
 
         <div class="container" id="cadastro">
@@ -26,7 +26,7 @@
 
             <form
                 th:action="${profissional.id == null} ? @{/profissionais/salvar} : @{/profissionais/editar}"
-                th:object="${profissional}" method="POST" enctype="multipart/form-data">
+                th:object="${profissional}" method="POST">
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -77,13 +77,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="qualificacao">Qualificação (PDF, DOC, etc.)</label> 
-                        <input type="file" class="form-control-file" id="qualificacao"
-                            name="file" accept=".pdf, .doc, .docx, .odt"
-                            th:classappend="${#fields.hasErrors('qualificacao')} ? is-invalid" />
-                        
-                        <div class="invalid-feedback">
-                            <span th:errors="*{qualificacao}"></span>
-                        </div>
+                        <input type="file" name="file" accept=".pdf, .doc, .docx, .odt"/>
                     </div>
                 </div>
 
