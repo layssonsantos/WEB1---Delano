@@ -34,8 +34,8 @@ public class ProfissionalController {
     }
 
     @GetMapping("/listar")
-    public String listar(ModelMap model) {
-        model.addAttribute("profissionais", profissionalService.buscarTodos());
+    public String listar(ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
+        model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
         return "profissional/lista";
     }
 

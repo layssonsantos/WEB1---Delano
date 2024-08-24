@@ -8,7 +8,7 @@ public interface IClienteService {
 
 	Cliente buscarPorId(Long id);
 
-	List<Cliente> buscarTodos();
+	List<Cliente> buscarTodos(String campo);
 
 	void salvar(Cliente cliente);
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Cliente;
@@ -28,8 +29,8 @@ public class ClienteController {
 	}
 
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("clientes", clienteService.buscarTodos());
+	public String listar(ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
+		model.addAttribute("clientes", clienteService.buscarTodos(campo));
 		return "cliente/lista";
 	}
 

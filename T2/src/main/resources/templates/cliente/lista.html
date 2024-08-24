@@ -29,12 +29,12 @@
                 <table class="table table-striped table-hover table-sm">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Nome</th>
-                            <th>E-mail</th>
-                            <th>CPF</th>
-                            <th>Telefone</th>
-                            <th>Data de Nascimento</th>
+                            <th><a th:href="@{/clientes/listar?order=id}">#</a></th>
+                            <th><a th:href="@{/clientes/listar?order=nome}">Nome</a></th>
+                            <th><a th:href="@{/clientes/listar?order=email}">E-mail</a></th>
+                            <th><a th:href="@{/clientes/listar?order=CPF}">CPF</a></th>
+                            <th><a th:href="@{/clientes/listar?order=telefone}">Telefone</a></th>
+                            <th><a th:href="@{/clientes/listar?order=dataNascimento}">Data de Nascimento</a></th>
                             <th>Ação</th>
                         </tr>
                     </thead>
@@ -54,7 +54,7 @@
                                 <button
                                     th:id="${'btn_clientes/excluir/' + cliente.id}"
                                     type="button" class="btn btn-danger btn-sm"
-                                    data-toggle="modal" data-target="#myModal">
+                                    data-toggle="modal" data-target="#modalCliente">
                                     <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
                                 </button>
                             </td>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div th:replace="~{fragments/modal::modal}"></div>
+        <div th:replace="~{fragments/modalCliente :: modal}"></div>
     </section>
 </body>
 </html>
