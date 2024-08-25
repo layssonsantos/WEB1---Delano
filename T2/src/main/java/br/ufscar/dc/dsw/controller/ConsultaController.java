@@ -50,8 +50,13 @@ public class ConsultaController {
             return "consulta/cadastro";
         }
 
-        if (consultaService.existeConflito(consulta)) {
-            result.rejectValue("dataHora", "error.consulta", "Já existe uma consulta agendada para este horário.");
+        Integer erro = consultaService.existeConflito(consulta);
+        if (erro!=0) {
+            if(erro == 1)
+            result.rejectValue("dataHora", "error.consulta", "Já existe uma consulta com este profissional agendada para este horário.");
+            if(erro == 2)
+            result.rejectValue("dataHora", "error.consulta", "Já existe uma consulta com este cliente agendada para este horário.");
+
             return "consulta/cadastro";
         }
 
@@ -76,7 +81,7 @@ public class ConsultaController {
             return "consulta/cadastro";
         }
 
-        if (consultaService.existeConflito(consulta)) {
+        if (consultaService.existeConflito(consulta)==0) {
             result.rejectValue("dataHora", "error.consulta", "Já existe uma consulta agendada para este horário.");
             return "consulta/cadastro";
         }

@@ -14,5 +14,5 @@ public interface IConsultaService {
 
     void excluir(Long id);
 
-    boolean existeConflito(Consulta consulta);
+    Integer existeConflito(Consulta consulta);
 }

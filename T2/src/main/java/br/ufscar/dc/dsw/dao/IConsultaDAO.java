@@ -27,6 +27,8 @@ public interface IConsultaDAO extends CrudRepository<Consulta, Long> {
     List<Consulta> findByDataHora(Date dataHora);
 
     List<Consulta> findByProfissionalAndDataHora(Profissional profissional, Date dataHora);
+    
+    List<Consulta> findByClienteAndDataHora(Cliente cliente, Date dataHora);
 
     boolean existsByProfissionalAndDataHora(Profissional profissional, Date dataHora);
 
