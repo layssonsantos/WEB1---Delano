@@ -99,6 +99,23 @@
                             <span th:errors="*{dataNascimento}"></span>
                         </div>
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="senha">Senha</label>
+                        <input type="text" class="form-control" id="senha" placeholder="Senha"
+                            th:field="*{senha}"
+                            th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:errors="*{senha}"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-md-6">
+                        <input type="hidden" class="form-control" id="papel" value="ROLE_CLIENTE" readonly
+                            th:field="*{papel}" />
+                    </div>
+                    
                 </div>
 
                 <input type="hidden" id="id" th:field="*{id}" />

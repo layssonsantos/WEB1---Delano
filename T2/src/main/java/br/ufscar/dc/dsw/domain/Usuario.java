@@ -16,7 +16,7 @@ public class Usuario extends AbstractEntity<Long> {
 
     @NotBlank(message = "{NotBlank.usuario.nome}")
     @Size(max = 60)
-    @Column(nullable = false, length = 60)
+    @Column(nullable = false,unique = true, length = 60)
     private String nome;
 
     @NotBlank(message = "{NotBlank.usuario.email}")
@@ -31,11 +31,10 @@ public class Usuario extends AbstractEntity<Long> {
     private String CPF;
 
     @NotBlank(message = "{NotBlank.usuario.senha}")
-    @Size(min = 8, message = "{Size.usuario.senha}")
+    @Size(min = 5, message = "{Size.usuario.senha}")
     @Column(nullable = false, length = 255)
     private String senha;
 
-    @NotBlank(message = "{NotBlank.usuario.papel}")
     @Size(max = 15)
     @Column(nullable = false, length = 15)
     private String papel;
