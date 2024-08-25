@@ -30,7 +30,7 @@ public class ClienteService implements IClienteService {
 
 	@Transactional(readOnly = true)
 	public Cliente buscarPorId(Long id) {
-		return dao.findById(id.longValue());
+		return dao.findById(id.longValue()).orElse(null);
 	}
 
 	@Transactional(readOnly = true)

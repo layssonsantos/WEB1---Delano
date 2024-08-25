@@ -6,19 +6,19 @@ import jakarta.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.dao.IClienteDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 
 @Component
 public class UniqueCPFValidator implements ConstraintValidator<UniqueCPF, String> {
 
     @Autowired
-    private IClienteDAO dao;
+    private IUsuarioDAO dao;
 
     @Override
     public boolean isValid(String CPF, ConstraintValidatorContext context) {
         if (dao != null) {
-            Cliente aluno = dao.findByCPF(CPF);
+            Usuario aluno = dao.findByCPF(CPF);
             return aluno == null;
         } else {
             // Durante a execução da classe MvcApplication

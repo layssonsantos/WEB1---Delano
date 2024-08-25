@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+</head>
+<body>
+
+    <section class="layout-content" layout:fragment="corpo">
+
+        <nav class="navbar navbar-expand-md bg-light">
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                        <span>Login</span></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container" id="login">
+
+            <div th:replace="~{fragments/alert}"></div>
+
+            <form th:action="@{/login}" method="POST">
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">Nome</label> 
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Nome"
+                            autofocus="autofocus"
+                            th:classappend="${param.error} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:if="${param.error}" th:text="'Nome ou senha incorretos.'"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label for="password">Senha</label> 
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha"
+                            th:classappend="${param.error} ? is-invalid" />
+                        
+                        <div class="invalid-feedback">
+                            <span th:if="${param.error}" th:text="'Nome ou senha incorretos.'"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

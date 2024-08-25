@@ -1,24 +1,17 @@
 package br.ufscar.dc.dsw.dao;
 
 import java.util.List;
-
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
-
 import br.ufscar.dc.dsw.domain.Profissional;
 
-@SuppressWarnings("unchecked")
-public interface IProfissionalDAO extends CrudRepository<Profissional, Long>{
+public interface IProfissionalDAO extends CrudRepository<Profissional, Long> {
 
-	Profissional findById(long id);
+    List<Profissional> findByEspecialidade(String especialidade, Sort sort);
 
-    Profissional findByCPF(String CPF);
+    List<Profissional> findAll(Sort sort);
 
-	List<Profissional> findByEspecialidade(String especialidade, Sort sort);
+    <S extends Profissional> S save(S profissional);
 
-	List<Profissional> findAll(Sort sort);
-	
-	Profissional save(Profissional profissional);
-
-	void deleteById(Long id);
+    void deleteById(Long id);
 }

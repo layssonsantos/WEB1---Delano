@@ -1,22 +1,15 @@
 package br.ufscar.dc.dsw.dao;
 
 import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.domain.Sort;
-
+import org.springframework.data.repository.CrudRepository;
 import br.ufscar.dc.dsw.domain.Cliente;
 
-@SuppressWarnings("unchecked")
-public interface IClienteDAO extends CrudRepository<Cliente, Long>{
+public interface IClienteDAO extends CrudRepository<Cliente, Long> {
 
-	Cliente findById(long id);
+    List<Cliente> findAll(Sort sort);
 
-    Cliente findByCPF(String CPF);
+    <S extends Cliente> S save(S cliente);
 
-	List<Cliente> findAll(Sort sort);
-	
-	Cliente save(Cliente livro);
-
-	void deleteById(Long id);
+    void deleteById(Long id);
 }
