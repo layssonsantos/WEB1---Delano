@@ -29,10 +29,10 @@ public class ClienteController {
 	}
 
 	@GetMapping("/listar")
-	public String listar(ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-		model.addAttribute("clientes", clienteService.buscarTodos(campo));
-		return "cliente/lista";
-	}
+    public String listar(ModelMap model) {
+        model.addAttribute("clientes", clienteService.buscarTodos());
+        return "cliente/lista";
+    }
 
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
@@ -65,9 +65,9 @@ public class ClienteController {
 	}
 
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		clienteService.excluir(id);
-		attr.addFlashAttribute("sucess", "cliente excluído com sucesso.");
-		return "redirect:/clientes/listar";
-	}
+    public String excluir(@PathVariable("id") Long id, ModelMap model) {
+        clienteService.excluir(id);
+        model.addAttribute("success", "cliente excluído com sucesso.");
+        return listar(model);
+    }
 }

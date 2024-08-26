@@ -32,8 +32,8 @@ public class ConsultaController {
 
     @GetMapping("/cadastrar")
     public String cadastrar(Consulta consulta, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-        model.addAttribute("clientes", clienteService.buscarTodos(campo));
-        model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+        model.addAttribute("clientes", clienteService.buscarTodosCampo(campo));
+        model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
         return "consulta/cadastro";
     }
 
@@ -64,8 +64,8 @@ public class ConsultaController {
     public String preEditar(@PathVariable("id") Long id, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
         Consulta consulta = consultaService.buscarPorId(id);
         model.addAttribute("consulta", consulta);
-        model.addAttribute("clientes", clienteService.buscarTodos(campo));
-        model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+        model.addAttribute("clientes", clienteService.buscarTodosCampo(campo));
+        model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
         return "consulta/cadastro";
     }
 

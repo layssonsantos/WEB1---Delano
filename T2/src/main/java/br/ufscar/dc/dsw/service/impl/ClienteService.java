@@ -34,9 +34,18 @@ public class ClienteService implements IClienteService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Cliente> buscarTodos(String campo) {
+	public List<Cliente> buscarTodosCampo(String campo) {
 		List<Cliente> clientes = new ArrayList<>();
 		for (Cliente cliente: dao.findAll(orderBy(campo))) {
+			clientes.add(cliente);
+		}
+		return clientes;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Cliente> buscarTodos() {
+		List<Cliente> clientes = new ArrayList<>();
+		for (Cliente cliente: dao.findAll()) {
 			clientes.add(cliente);
 		}
 		return clientes;

@@ -19,7 +19,7 @@ public class HomeController {
         if (especialidade != null && !especialidade.isEmpty()) {
             model.addAttribute("profissionais", profissionalService.buscarPorEspecialidade(especialidade, campo));
         } else {
-            model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+            model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
         }
         return "home";
     }
@@ -30,7 +30,7 @@ public class HomeController {
         if (especialidade != null && !especialidade.isEmpty()) {
             model.addAttribute("profissionais", profissionalService.buscarPorEspecialidade(especialidade, campo));
         } else {
-            model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+            model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
         }
         return "home";
     }
