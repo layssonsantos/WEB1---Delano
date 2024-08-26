@@ -10,6 +10,8 @@ public interface IProfissionalService {
 
 	List<Profissional> buscarTodos(String campo);
 
+	List<Profissional> buscarTodos();
+
 	List<Profissional> buscarPorEspecialidade(String especialidade, String campo);
 
 	void salvar(Profissional profissional);

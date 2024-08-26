@@ -55,7 +55,7 @@ public class ClienteController {
 	@PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CPF")  == null) {
+		if (result.getFieldErrorCount() > 1 && result.getFieldError("CPF")  == null) {
 			return "cliente/cadastro";
 		}
 
