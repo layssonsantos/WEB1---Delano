@@ -38,6 +38,17 @@ public class Consulta extends AbstractEntity<Long> {
     @Column(nullable = false)
     private Date dataHora;
 
+    // Getters e Setters
+    
+    public Consulta() {
+    }
+
+    public Consulta(Cliente cliente, Profissional profissional, Date dataHora) {
+        this.cliente = cliente;
+        this.profissional = profissional;
+        this.dataHora = dataHora;
+    }
+
     public Cliente getCliente() {
         return cliente;
     }

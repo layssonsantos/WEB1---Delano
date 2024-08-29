@@ -24,6 +24,15 @@ public class Profissional extends Usuario {
 
     // Getters e Setters
 
+    public Profissional() {
+    }
+
+    public Profissional(String nome, String email, String CPF, String senha, String papel, String especialidade, byte[] qualificacao) {
+        super(nome, email, CPF, senha, papel);
+        this.especialidade = especialidade;
+        this.qualificacao = qualificacao;
+    }
+
     public String getEspecialidade() {
         return especialidade;
     }

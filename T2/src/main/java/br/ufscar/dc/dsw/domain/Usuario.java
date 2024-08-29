@@ -35,9 +35,21 @@ public class Usuario extends AbstractEntity<Long> {
     @Column(nullable = false, length = 255)
     private String senha;
 
-    @Size(max = 15)
+    @Size(max = 20)
     @Column(nullable = false, length = 15)
     private String papel;
+
+    
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String email, String CPF, String senha, String papel) {
+        this.nome = nome;
+        this.email = email;
+        this.CPF = CPF;
+        this.senha = senha;
+        this.papel = papel;
+    }
 
     // Getters e Setters
 

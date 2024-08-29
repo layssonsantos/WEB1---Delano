@@ -39,6 +39,16 @@ public class Cliente extends Usuario {
 
     // Getters e Setters
 
+    public Cliente() {
+    }
+
+    public Cliente(String nome, String email, String CPF, String senha, String papel, String telefone, String sexo, Date dataNascimento) {
+        super(nome, email, CPF, senha, papel);
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+    }
+
     public String getTelefone() {
         return telefone;
     }

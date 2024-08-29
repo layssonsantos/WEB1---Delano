@@ -1,54 +1,43 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout2}">
 <head>
-    <meta charset="UTF-8" />
-    <title>Login</title>
+    <title th:text="#{login.message}"></title>
 </head>
 <body>
+    <div layout:fragment="content" th:remove="tag">
 
-    <section class="layout-content" layout:fragment="corpo">
-
-        <nav class="navbar navbar-expand-md bg-light">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span>Login</span></li>
-                </ul>
+        <br /> <br /> <br />
+        <div>
+            <div class="col-md-6">
+                <h1 th:text="#{login.message}"></h1>
+                <form th:action="@{/login}" method="post">
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            <span th:text="#{login.error}"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="username" th:text="#{login.username}"></label>: 
+                        <input type="text" id="username" name="username" 
+                            class="form-control" autofocus th:placeholder="#{login.username}">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" th:text="#{login.password}"></label>: 
+                        <input type="password" id="password" name="password"
+                            class="form-control" th:placeholder="#{login.password}">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-3 ms-auto">
+                                <input type="submit" name="login-submit" id="login-submit"
+                                    class="form-control btn btn-info" th:value="#{login.button}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-        </nav>
-
-        <div class="container" id="login">
-
-            <div th:replace="~{fragments/alert}"></div>
-
-            <form th:action="@{/login}" method="POST">
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="username">Nome</label> 
-                        <input type="text" class="form-control" id="username" name="username" placeholder="Nome"
-                            autofocus="autofocus"
-                            th:classappend="${param.error} ? is-invalid" />
-                        
-                        <div class="invalid-feedback">
-                            <span th:if="${param.error}" th:text="'Nome ou senha incorretos.'"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="password">Senha</label> 
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Senha"
-                            th:classappend="${param.error} ? is-invalid" />
-                        
-                        <div class="invalid-feedback">
-                            <span th:if="${param.error}" th:text="'Nome ou senha incorretos.'"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn btn-primary btn-sm">Entrar</button>
-            </form>
         </div>
-    </section>
+    </div>
 </body>
 </html>

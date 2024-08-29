@@ -24,7 +24,7 @@ public class HomeController {
         return "home";
     }
     
-    @GetMapping("/profissionais/pesquisar")
+    @GetMapping("/pesquisar")
     public String pesquisarPorEspecialidade(@RequestParam(name = "especialidade", required = false) String especialidade,
                                             @RequestParam(name = "order", defaultValue = "id") String campo, ModelMap model) {
         if (especialidade != null && !especialidade.isEmpty()) {
