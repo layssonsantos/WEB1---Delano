@@ -1,130 +1,25 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8" />
-    <script>
-        // Script para atualizar os campos com base na seleção do papel
-        function atualizarCampos() {
-            var papel = document.getElementById("papel").value;
-            document.getElementById("campos_cliente").style.display = papel === 'ROLE_CLIENTE' ? 'block' : 'none';
-            document.getElementById("campos_profissional").style.display = papel === 'ROLE_PROFISSIONAL' ? 'block' : 'none';
-        }
-    </script>
+    <meta charset="UTF-8">
+    <title>Escolha de Cadastro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <section class="layout-content" layout:fragment="corpo">
-
-        <nav class="navbar navbar-expand-md bg-light">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span>Cadastrar Usuário</span></li>
-                </ul>
-                <a class="btn btn-primary btn-md" th:href="@{/usuarios/listar}" role="button"> 
-                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> 
-                    <span>Listar Usuários</span>
-                </a>
-            </div>
-        </nav>
-
-        <div class="container" id="cadastro">
-
-            <div th:replace="~{fragments/alert}"></div>
-
-            <form th:action="${usuario.id == null} ? @{/usuarios/salvar} : @{/usuarios/editar}" 
-                  th:object="${usuario}" method="POST" enctype="multipart/form-data">
-                  
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" placeholder="Nome"
-                               autofocus="autofocus" th:field="*{nome}" 
-                               th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
-                        <div class="invalid-feedback"><span th:errors="*{nome}"></span></div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="email">E-mail</label>
-                        <input type="email" class="form-control" id="email" placeholder="E-mail"
-                               th:field="*{email}" th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
-                        <div class="invalid-feedback"><span th:errors="*{email}"></span></div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="CPF">CPF</label>
-                        <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
-                               th:readonly="${usuario.id != null}" th:field="*{CPF}" 
-                               th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
-                               data-mask="000.000.000-00" data-mask-reverse="true" />
-                        <div class="invalid-feedback"><span th:errors="*{CPF}"></span></div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="senha">Senha</label>
-                        <input type="password" class="form-control" id="senha" placeholder="Senha"
-                               th:field="*{senha}" th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
-                        <div class="invalid-feedback"><span th:errors="*{senha}"></span></div>
-                    </div>
-
-                    <!-- Seletor de papel -->
-                    <div class="form-group col-md-6">
-                        <label for="papel">Papel</label>
-                        <select id="papel" class="form-control" th:field="*{papel}" onchange="atualizarCampos()">
-                            <option value="ROLE_CLIENTE">Cliente</option>
-                            <option value="ROLE_PROFISSIONAL">Profissional</option>
-                        </select>
-                    </div>
-
-                    <!-- Campos específicos para Cliente -->
-                    <div id="campos_cliente" th:if="${usuario.papel == 'ROLE_CLIENTE'}">
-                        <div class="form-group col-md-6">
-                            <label for="telefone">Telefone</label>
-                            <input type="text" class="form-control" id="telefone" placeholder="Telefone"
-                                   data-mask="(00) 00000-0000" th:field="*{telefone}" 
-                                   th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
-                            <div class="invalid-feedback"><span th:errors="*{telefone}"></span></div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="sexo">Sexo</label>
-                            <select id="sexo" class="form-control" th:field="*{sexo}"
-                                    th:classappend="${#fields.hasErrors('sexo')} ? is-invalid">
-                                <option value="">Selecione</option>
-                                <option value="M">Masculino</option>
-                                <option value="F">Feminino</option>
-                            </select>
-                            <div class="invalid-feedback"><span th:errors="*{sexo}"></span></div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="dataNascimento">Data de Nascimento</label>
-                            <input type="text" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"
-                                   data-mask="00/00/0000" maxlength="10" autocomplete="off"
-                                   th:classappend="${#fields.hasErrors('dataNascimento')} ? is-invalid" />
-                            <div class="invalid-feedback"><span th:errors="*{dataNascimento}"></span></div>
-                        </div>
-                    </div> 
-
-                    <!-- Campos específicos para Profissional -->
-                    <div id="campos_profissional" th:if="${usuario.papel == 'ROLE_PROFISSIONAL'}">
-                        <div class="form-group col-md-6">
-                            <label for="especialidade">Especialidade</label>
-                            <input type="text" class="form-control" id="especialidade" placeholder="Especialidade"
-                                   th:field="*{especialidade}" 
-                                   th:classappend="${#fields.hasErrors('especialidade')} ? is-invalid" />
-                            <div class="invalid-feedback"><span th:errors="*{especialidade}"></span></div>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label for="qualificacao">Qualificação (PDF, DOC, etc.)</label> 
-                            <input type="file" class="form-control-file" name="file" accept=".pdf, .doc, .docx, .odt"/>
-                        </div>
-                    </div>
+        <div class="container mt-5">
+            <h2>Como deseja se cadastrar?</h2>
+            <p>Escolha uma opção abaixo para continuar:</p>
+            
+            <!-- Botões de escolha de cadastro -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <a href="/clientes/cadastrar" class="btn btn-primary btn-lg btn-block">Cadastrar como Cliente</a>
                 </div>
-
-                <input type="hidden" id="id" th:field="*{id}" />
-                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
-            </form>
+                <div class="col-md-6">
+                    <a href="/profissionais/cadastrar" class="btn btn-secondary btn-lg btn-block">Cadastrar como Profissional</a>
+                </div>
+            </div>
         </div>
     </section>
 </body>

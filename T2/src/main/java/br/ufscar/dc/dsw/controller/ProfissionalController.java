@@ -52,8 +52,8 @@ public class ProfissionalController {
 		}
 
         profissionalService.salvar(profissional);
-        attr.addFlashAttribute("success", "Profissional inserido com sucesso.");
-        return "redirect:/profissionais/listar";
+        attr.addFlashAttribute("success", "Cadastro realizado com sucesso. Faça login para continuar.");
+        return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")

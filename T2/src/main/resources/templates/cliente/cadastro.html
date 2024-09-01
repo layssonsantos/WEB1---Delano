@@ -1,39 +1,41 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
+
 <head>
     <meta charset="UTF-8" />
 </head>
+
 <body>
 
     <section class="layout-content" layout:fragment="corpo">
-
-        <nav class="navbar navbar-expand-md bg-light">
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span>Cadastrar Cliente</span></li>
-                </ul>
-                <a class="btn btn-primary btn-md" th:href="@{/clientes/listar}"
-                    role="button"> <span class="oi oi-spreadsheet" title="Listar"
-                    aria-hidden="true"></span> <span>Listar Clientes</span>
-                </a>
-            </div>
-        </nav>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <nav class="navbar navbar-expand-md bg-light">
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                            <span>Cadastrar Cliente</span>
+                        </li>
+                    </ul>
+                    <a class="btn btn-primary btn-md" th:href="@{/clientes/listar}" role="button"> <span
+                            class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> <span>Listar
+                            Clientes</span>
+                    </a>
+                </div>
+            </nav>
+        </div>
 
         <div class="container" id="cadastro">
 
             <div th:replace="~{fragments/alert}"></div>
 
-            <form
-                th:action="${cliente.id == null} ? @{/clientes/salvar} : @{/clientes/editar}"
-                th:object="${cliente}" method="POST">
+            <form th:action="${cliente.id == null} ? @{/clientes/salvar} : @{/clientes/editar}" th:object="${cliente}"
+                method="POST">
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" placeholder="Nome"
-                            autofocus="autofocus" th:field="*{nome}"
-                            th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
+                        <input type="text" class="form-control" id="nome" placeholder="Nome" autofocus="autofocus"
+                            th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
                         <div class="invalid-feedback">
                             <span th:errors="*{nome}"></span>
@@ -54,10 +56,9 @@
                     <div class="form-group col-md-6">
                         <label for="CPF">CPF</label>
                         <input type="text" class="form-control" id="CPF" placeholder="___.___.___-__"
-                            th:readonly="${cliente.id != null}"
-                            autofocus="autofocus" th:field="*{CPF}"
-                            th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
-                            data-mask="000.000.000-00" data-mask-reverse="true" />
+                            th:readonly="${cliente.id != null}" autofocus="autofocus" th:field="*{CPF}"
+                            th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" data-mask="000.000.000-00"
+                            data-mask-reverse="true" />
 
                         <div class="invalid-feedback">
                             <span th:errors="*{CPF}"></span>
@@ -69,7 +70,7 @@
                         <input type="text" class="form-control" id="telefone" placeholder="Telefone"
                             data-mask="(00) 00000-0000" th:field="*{telefone}"
                             th:classappend="${#fields.hasErrors('telefone')} ? is-invalid" />
-                        
+
                         <div class="invalid-feedback">
                             <span th:errors="*{telefone}"></span>
                         </div>
@@ -102,20 +103,19 @@
 
                     <div class="form-group col-md-6">
                         <label for="senha">Senha</label>
-                        <input type="text" class="form-control" id="senha" placeholder="Senha"
-                            th:field="*{senha}"
+                        <input type="text" class="form-control" id="senha" placeholder="Senha" th:field="*{senha}"
                             th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
-                        
+
                         <div class="invalid-feedback">
                             <span th:errors="*{senha}"></span>
                         </div>
                     </div>
-                    
+
                     <div class="form-group col-md-6">
                         <input type="hidden" class="form-control" id="papel" value="ROLE_CLIENTE" readonly
                             th:field="*{papel}" />
                     </div>
-                    
+
                 </div>
 
                 <input type="hidden" id="id" th:field="*{id}" />
@@ -124,4 +124,5 @@
         </div>
     </section>
 </body>
+
 </html>

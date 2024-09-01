@@ -42,8 +42,8 @@ public class ClienteController {
 		}
 
 		clienteService.salvar(cliente);
-		attr.addFlashAttribute("sucess", "cliente inserido com sucesso");
-		return "redirect:/clientes/listar";
+		attr.addFlashAttribute("sucess", "Cadastro realizado com sucesso. Faça login para continuar.");
+		return "redirect:/";
 	}
 
 	@GetMapping("/editar/{id}")
