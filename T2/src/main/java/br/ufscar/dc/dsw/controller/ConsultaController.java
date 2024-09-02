@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.service.spec.IConsultaService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
+import br.ufscar.dc.dsw.security.UsuarioDetails;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 @Controller
 @RequestMapping("/consultas")
@@ -42,6 +45,18 @@ public class ConsultaController {
         model.addAttribute("consultas", consultaService.buscarTodos());
         return "consulta/lista";
     }
+
+    private Usuario getUsuario() {
+        UsuarioDetails usuarioDetails = (UsuarioDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return usuarioDetails.getUsuario();
+    }
+
+    @GetMapping("/minhasConsultas")
+    public String MinhasConsultas(ModelMap model) {
+        model.addAttribute("consultas", consultaService.buscarPorUsuario(this.getUsuario()));
+        return "consulta/lista";
+    }
+
 
     @PostMapping("/salvar")
     public String salvar(@Valid Consulta consulta, BindingResult result, RedirectAttributes attr) {
