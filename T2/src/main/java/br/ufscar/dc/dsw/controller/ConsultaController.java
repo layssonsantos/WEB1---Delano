@@ -1,6 +1,11 @@
 package br.ufscar.dc.dsw.controller;
 
 import jakarta.validation.Valid;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.internet.InternetAddress;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,8 +45,8 @@ public class ConsultaController {
     @GetMapping("/cadastrar")
     public String cadastrar(Consulta consulta, ModelMap model,
             @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-        model.addAttribute("clientes", clienteService.buscarTodos(campo));
-        model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+        model.addAttribute("clientes", clienteService.buscarTodos());
+        model.addAttribute("profissionais", profissionalService.buscarTodos());
         return "consulta/cadastro";
     }
 
@@ -83,10 +88,25 @@ public class ConsultaController {
         String assunto = "Confirmação de Consulta";
         String corpoEmail = "Sua consulta foi agendada com sucesso!";
 
-        InternetAddress from = new InternetAddress("lucas.roberto@estudante.ufscar.br", "Gerenciador Academico");
+        InternetAddress from = new InternetAddress();
+        InternetAddress toCliente = new InternetAddress();
+        InternetAddress toProfissional = new InternetAddress();
 
-        InternetAddress toCliente = new InternetAddress(emailCliente, consulta.getCliente().getNome());
-        InternetAddress toProfissional = new InternetAddress(emailProfissional, consulta.getProfissional().getNome());
+        try {
+
+            from.setAddress("lucas.roberto@estudante.ufscar.br");
+            from.setPersonal("Gerenciador Academico", "UTF-8");
+
+            toCliente.setAddress(emailCliente);
+            toCliente.setPersonal(consulta.getCliente().getNome());
+
+            toProfissional.setAddress(emailProfissional);
+            toProfissional.setPersonal(consulta.getProfissional().getNome());
+            
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        
 
         emailService.send(from, toCliente, assunto, corpoEmail);
         emailService.send(from, toProfissional, assunto, corpoEmail);

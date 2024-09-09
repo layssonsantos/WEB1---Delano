@@ -130,7 +130,13 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	
+   <dependency>
+     <groupId>com.google.appengine</groupId>
+     <artifactId>appengine-api-1.0-sdk</artifactId>
+     <version>1.9.76</version>
+   </dependency>
+ </dependencies>
 
 	<build>
 		<plugins>
