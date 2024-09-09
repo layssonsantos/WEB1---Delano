@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Cliente;
@@ -29,10 +28,10 @@ public class ClienteController {
 	}
 
 	@GetMapping("/listar")
-	public String listar(ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-		model.addAttribute("clientes", clienteService.buscarTodos(campo));
-		return "cliente/lista";
-	}
+    public String listar(ModelMap model) {
+        model.addAttribute("clientes", clienteService.buscarTodos());
+        return "cliente/lista";
+    }
 
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
@@ -42,8 +41,8 @@ public class ClienteController {
 		}
 
 		clienteService.salvar(cliente);
-		attr.addFlashAttribute("sucess", "cliente inserido com sucesso");
-		return "redirect:/clientes/listar";
+		attr.addFlashAttribute("sucess", "Cadastro realizado com sucesso. Faça login para continuar.");
+		return "redirect:/";
 	}
 
 	@GetMapping("/editar/{id}")
@@ -55,7 +54,7 @@ public class ClienteController {
 	@PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CPF")  == null) {
+		if (result.getFieldErrorCount() > 1 && result.getFieldError("CPF")  == null) {
 			return "cliente/cadastro";
 		}
 
@@ -65,9 +64,9 @@ public class ClienteController {
 	}
 
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		clienteService.excluir(id);
-		attr.addFlashAttribute("sucess", "cliente excluído com sucesso.");
-		return "redirect:/clientes/listar";
-	}
+    public String excluir(@PathVariable("id") Long id, ModelMap model) {
+        clienteService.excluir(id);
+        model.addAttribute("success", "cliente excluído com sucesso.");
+        return listar(model);
+    }
 }

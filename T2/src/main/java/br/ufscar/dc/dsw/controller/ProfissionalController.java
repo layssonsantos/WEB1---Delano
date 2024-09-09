@@ -34,8 +34,8 @@ public class ProfissionalController {
     }
 
     @GetMapping("/listar")
-    public String listar(ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-        model.addAttribute("profissionais", profissionalService.buscarTodos(campo));
+    public String listar(ModelMap model) {
+        model.addAttribute("profissionais", profissionalService.buscarTodos());
         return "profissional/lista";
     }
 
@@ -52,8 +52,8 @@ public class ProfissionalController {
 		}
 
         profissionalService.salvar(profissional);
-        attr.addFlashAttribute("success", "Profissional inserido com sucesso.");
-        return "redirect:/profissionais/listar";
+        attr.addFlashAttribute("success", "Cadastro realizado com sucesso. Faça login para continuar.");
+        return "redirect:/";
     }
 
     @GetMapping("/editar/{id}")
@@ -65,7 +65,7 @@ public class ProfissionalController {
     @PostMapping("/editar")
     public String editar(@Valid Profissional profissional, BindingResult result, RedirectAttributes attr, @RequestParam(name ="file") MultipartFile file) throws IOException {
 
-        if (result.getFieldErrorCount() > 1 || result.getFieldError("CPF")  == null) {
+        if (result.getFieldErrorCount() > 1 && result.getFieldError("CPF")  == null) {
 			return "profissional/cadastro";
 		}
 
@@ -79,10 +79,10 @@ public class ProfissionalController {
     }
 
     @GetMapping("/excluir/{id}")
-    public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
+    public String excluir(@PathVariable("id") Long id, ModelMap model) {
         profissionalService.excluir(id);
-        attr.addFlashAttribute("success", "Profissional excluído com sucesso.");
-        return "redirect:/profissionais/listar";
+        model.addAttribute("success", "Profissional excluído com sucesso.");
+        return listar(model);
     }
  
 	@GetMapping(value = "/download/{id}")

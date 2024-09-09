@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import jakarta.persistence.Basic;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -37,6 +37,17 @@ public class Consulta extends AbstractEntity<Long> {
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(nullable = false)
     private Date dataHora;
+
+    // Getters e Setters
+    
+    public Consulta() {
+    }
+
+    public Consulta(Cliente cliente, Profissional profissional, Date dataHora) {
+        this.cliente = cliente;
+        this.profissional = profissional;
+        this.dataHora = dataHora;
+    }
 
     public Cliente getCliente() {
         return cliente;

@@ -3,11 +3,14 @@ package br.ufscar.dc.dsw.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 
 import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Profissional;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 @SuppressWarnings("unchecked")
 public interface IConsultaDAO extends CrudRepository<Consulta, Long> {
@@ -31,4 +34,8 @@ public interface IConsultaDAO extends CrudRepository<Consulta, Long> {
     boolean existsByProfissionalAndDataHora(Profissional profissional, Date dataHora);
 
     boolean existsByClienteAndDataHora(Cliente cliente, Date dataHora);
+
+    @Query("SELECT c FROM Consulta c WHERE c.cliente.id = :#{#usuario.id} OR c.profissional.id = :#{#usuario.id}")
+    List<Consulta> findByUsuario(@Param("usuario") Usuario usuario);
+
 }

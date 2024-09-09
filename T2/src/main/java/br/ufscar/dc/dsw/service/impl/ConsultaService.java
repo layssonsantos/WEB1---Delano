@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import br.ufscar.dc.dsw.dao.IConsultaDAO;
 import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.service.spec.IConsultaService;
+import br.ufscar.dc.dsw.domain.Usuario;
 
 @Service
 @Transactional(readOnly = false)
@@ -28,6 +29,11 @@ public class ConsultaService implements IConsultaService {
     @Transactional(readOnly = true)
     public Consulta buscarPorId(Long id) {
         return dao.findById(id.longValue());
+    }
+
+    @Transactional(readOnly = true)
+    public List<Consulta> buscarPorUsuario(Usuario usuario) {
+        return dao.findByUsuario(usuario);
     }
 
     @Transactional(readOnly = true)

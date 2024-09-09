@@ -10,15 +10,15 @@ import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 
 @Component
-public class UniqueCPFValidator implements ConstraintValidator<UniqueCPF, String> {
+public class UniqueNomeValidator implements ConstraintValidator<UniqueNome, String> {
 
     @Autowired
     private IUsuarioDAO dao;
 
     @Override
-    public boolean isValid(String CPF, ConstraintValidatorContext context) {
+    public boolean isValid(String nome, ConstraintValidatorContext context) {
         if (dao != null) {
-            Usuario aluno = dao.findByCPF(CPF);
+            Usuario aluno = dao.findByNome(nome);
             return aluno == null;
         } else {
             // Durante a execução da classe MvcApplication
