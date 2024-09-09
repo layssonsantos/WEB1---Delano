@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <section class="layout-content" layout:fragment="corpo">
+
+        <div class="container" style="text-align: center;">
+            <h1>Bem-vindo ao sistema OASS</h1>
+            <div class="container" id="listagem">
+
+                <!-- Formulário de Pesquisa por Especialidade -->
+                <form th:action="@{/pesquisar}" method="get" class="form-inline justify-content-center mb-4">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="especialidade" class="sr-only">Especialidade</label>
+                        <input type="text" class="form-control" id="especialidade" name="especialidade" placeholder="Digite a especialidade">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+                </form>
+
+                <div th:replace="~{fragments/alert}"></div>
+
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>CPF</th>
+                                <th><a th:href="@{/?order=especialidade}">Especialidade</a></th>
+                                <th>Qualificação (PDF)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="profissional : ${profissionais}">
+                                <td th:text="${profissional.id}"></td>
+                                <td th:text="${profissional.nome}"></td>
+                                <td th:text="${profissional.email}"></td>
+                                <td th:text="${profissional.CPF}"></td>
+                                <td th:text="${profissional.especialidade}"></td>
+                                <td style="text-align: center">
+                                    <span th:if="${profissional.qualificacao}">
+                                        <a th:href="@{/profissionais/download/{id} (id=${profissional.id})}" target="_blank">
+                                            <img src="/image/pdf-icon.png" alt="Download PDF" width="24px" />
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+
+</html>

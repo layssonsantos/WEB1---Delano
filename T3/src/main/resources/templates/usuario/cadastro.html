@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Escolha de Cadastro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <section class="layout-content" layout:fragment="corpo">
+        <div class="container mt-5">
+            <h2>Como deseja se cadastrar?</h2>
+            <p>Escolha uma opção abaixo para continuar:</p>
+            
+            <!-- Botões de escolha de cadastro -->
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <a href="/clientes/cadastrar" class="btn btn-primary btn-lg btn-block">Cadastrar como Cliente</a>
+                </div>
+                <div class="col-md-6">
+                    <a href="/profissionais/cadastrar" class="btn btn-secondary btn-lg btn-block">Cadastrar como Profissional</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
