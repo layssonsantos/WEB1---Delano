@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.security.access.method.P;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.ufscar.dc.dsw.domain.Consulta;
@@ -81,6 +82,24 @@ public class ConsultaController {
         return "redirect:/consultas/listar";
     }
 
+    @PostMapping("/salvarConsulta")
+    public String salvarConsulta(Consulta consulta, BindingResult result, RedirectAttributes attr) {
+        consulta.setCliente(clienteService.buscarPorId(this.getUsuario().getId()));
+
+        if (result.hasErrors()) {
+            return "consulta/cadastroCliente";
+        }
+
+        if (consultaService.existeConflito(consulta)) {
+            result.rejectValue("dataHora", "error.consulta", "Já existe uma consulta agendada para este horário.");
+            return "consulta/cadastroCliente";
+        }
+
+        consultaService.salvar(consulta);
+        attr.addFlashAttribute("success", "Consulta agendada com sucesso.");
+        return "redirect:/consultas/minhasConsultas";
+    }
+
     @GetMapping("/editar/{id}")
     public String preEditar(@PathVariable("id") Long id, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
         Consulta consulta = consultaService.buscarPorId(id);
@@ -112,5 +131,12 @@ public class ConsultaController {
         consultaService.excluir(id);
         attr.addFlashAttribute("success", "Consulta excluída com sucesso.");
         return "redirect:/consultas/listar";
+    }
+
+    @GetMapping("/excluirConsulta/{id}")
+    public String excluirConsulta(@PathVariable("id") Long id, RedirectAttributes attr) {
+        consultaService.excluir(id);
+        attr.addFlashAttribute("success", "Consulta foi cancelada com sucesso.");
+        return "redirect:/consultas/minhasConsultas";
     }
 }

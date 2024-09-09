@@ -63,14 +63,23 @@
                             <td th:text="${consulta.profissional.nome}"></td>
                             <td th:text="${#dates.format(consulta.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
                             <td colspan="2">
-                                <a class="btn btn-info btn-sm" th:href="@{/consultas/editar/{id} (id=${consulta.id}) }"
-                                    role="button">
-                                    <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
-                                </a>
-                                <button th:id="${'btn_consultas/excluir/' + consulta.id}" type="button"
-                                    class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal">
-                                    <span class="oi oi-circle-x" title="Excluir" aria-hidden="true"></span>
-                                </button>
+                                <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <a class="btn btn-info btn-sm"
+                                        th:href="@{/consultas/editar/{id} (id=${consulta.id}) }" role="button">
+                                        <span class="oi oi-brush" title="Editar" aria-hidden="true"></span>
+                                    </a>
+
+                                    <button th:id="${'btn_consultas/excluir/' + consulta.id}" type="button"
+                                        class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+                                        <span class="oi oi-circle-x" th:title="Excluir" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                                <div sec:authorize="hasRole('ROLE_CLIENTE')">
+                                    <button th:id="${'btn_consultas/excluirConsulta/' + consulta.id}" type="button"
+                                        class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#myModal">
+                                        <span class="oi oi-circle-x" th:title="Excluir" aria-hidden="true"></span>
+                                    </button>
+                                </div>
                             </td>
                         </tr>
                     </tbody>
@@ -78,7 +87,7 @@
             </div>
         </div>
 
-        <div th:replace="~{fragments/modal::modal}"></div>
+        <div th:replace="fragments/modal :: modal"></div>
     </section>
 </body>
 
