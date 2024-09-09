@@ -57,6 +57,12 @@ public class ConsultaController {
         return "consulta/lista";
     }
 
+    @GetMapping("/cadastrarConsulta")
+    public String cadastrarConsulta(Consulta consulta, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
+        model.addAttribute("cliente", clienteService.buscarPorId(this.getUsuario().getId()));
+        model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
+        return "consulta/cadastroCliente";
+    }
 
     @PostMapping("/salvar")
     public String salvar(@Valid Consulta consulta, BindingResult result, RedirectAttributes attr) {

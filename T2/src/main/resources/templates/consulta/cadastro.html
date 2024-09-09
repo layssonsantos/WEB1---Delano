@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
+
 <head>
     <meta charset="UTF-8" />
 </head>
+
 <body>
 
     <section class="layout-content" layout:fragment="corpo">
-
+        
         <nav class="navbar navbar-expand-md bg-light">
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span>Cadastrar Consulta</span></li>
+                        <span>Cadastrar Consulta</span>
+                    </li>
                 </ul>
-                <a class="btn btn-primary btn-md" th:href="@{/consultas/listar}"
-                    role="button"> <span class="oi oi-spreadsheet" title="Listar"
-                    aria-hidden="true"></span> <span>Listar Consultas</span>
+                <a class="btn btn-primary btn-md" th:href="@{/consultas/listar}" role="button"> <span
+                        class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> <span>Listar
+                        Consultas</span>
                 </a>
             </div>
         </nav>
@@ -24,24 +27,25 @@
 
             <div th:replace="~{fragments/alert}"></div>
 
-            <form
-                th:action="${consulta.id == null} ? @{/consultas/salvar} : @{/consultas/editar}"
+            <form th:action="${consulta.id == null} ? @{/consultas/salvar} : @{/consultas/editar}"
                 th:object="${consulta}" method="POST">
 
                 <div class="form-row">
+
                     <div class="form-group col-md-6">
                         <label for="cliente">Cliente</label>
                         <select id="cliente" class="form-control" th:field="*{cliente.id}"
                             th:classappend="${#fields.hasErrors('cliente')} ? is-invalid">
                             <option value="">Selecione</option>
-                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}"
-                                th:text="${cliente.nome}"></option>
+                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}">
+                            </option>
                         </select>
 
                         <div class="invalid-feedback">
                             <span th:errors="*{cliente}"></span>
                         </div>
                     </div>
+
 
                     <div class="form-group col-md-6">
                         <label for="profissional">Profissional</label>
@@ -59,10 +63,8 @@
 
                     <div class="form-group col-md-6">
                         <label for="dataHora">Data e Hora</label>
-                        <input type="datetime-local" class="form-control" id="dataHora"
-                            th:field="*{dataHora}"
-                            th:classappend="${#fields.hasErrors('dataHora')} ? is-invalid"
-                            step="3600" />
+                        <input type="datetime-local" class="form-control" id="dataHora" th:field="*{dataHora}"
+                            th:classappend="${#fields.hasErrors('dataHora')} ? is-invalid" step="3600" />
 
                         <div class="invalid-feedback">
                             <span th:errors="*{dataHora}"></span>
@@ -76,4 +78,5 @@
         </div>
     </section>
 </body>
+
 </html>
