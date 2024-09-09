@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+
+<head>
+    <meta charset="UTF-8" />
+</head>
+
+<body>
+    <section class="layout-content" layout:fragment="corpo">
+
+        <nav class="navbar navbar-expand-md bg-light">
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                        <span>Cadastrar Consulta</span>
+                    </li>
+                </ul>
+                <a class="btn btn-primary btn-md" th:href="@{/consultas/minhasConsultas}" role="button"> 
+                    <span class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> 
+                    <span>Listar Consultas</span>
+                </a>
+            </div>
+        </nav>
+
+        <div class="container" id="cadastro">
+
+            <div th:replace="~{fragments/alert}"></div>
+
+            <form th:action="${consulta.id == null} ? @{/consultas/salvar} : @{/consultas/editar}"
+                  th:object="${consulta}" method="POST">
+
+                <div class="form-group col-md-6">
+                    <label for="clienteNome">Cliente</label>
+                    <input type="text" class="form-control" id="clienteNome" th:value="${cliente.nome}" readonly />
+
+                    <input type="hidden" th:field="*{cliente.id}" th:value="${cliente.id}" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="profissional">Profissional</label>
+                    <select id="profissional" class="form-control" th:field="*{profissional.id}"
+                            th:classappend="${#fields.hasErrors('profissional')} ? is-invalid">
+                        <option value="">Selecione</option>
+                        <option th:each="profissional : ${profissionais}" th:value="${profissional.id}"
+                                th:text="${profissional.nome}"></option>
+                    </select>
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{profissional}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="dataHora">Data e Hora</label>
+                    <input type="datetime-local" class="form-control" id="dataHora" th:field="*{dataHora}"
+                           th:classappend="${#fields.hasErrors('dataHora')} ? is-invalid" step="3600" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{dataHora}"></span>
+                    </div>
+                </div>
+
+                <input type="hidden" id="id" th:field="*{id}" />
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+            </form>
+        </div> <!-- Fechamento da div container corrigido -->
+    </section>
+</body>
+
+</html>
