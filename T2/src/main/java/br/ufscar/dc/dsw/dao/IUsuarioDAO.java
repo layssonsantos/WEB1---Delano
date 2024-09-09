@@ -8,17 +8,25 @@ import org.springframework.data.repository.query.Param;
 
 import br.ufscar.dc.dsw.domain.Usuario;
 
-@SuppressWarnings("unchecked")
 public interface IUsuarioDAO extends CrudRepository<Usuario, Long> {
-	
-	Usuario findById(long id);
 
-	List<Usuario> findAll();
-	
-	Usuario save(Usuario usuario);
+    List<Usuario> findAll();
 
-	void deleteById(Long id);
-	
-    @Query("SELECT u FROM Usuario u WHERE u.username = :username")
-    public Usuario getUserByUsername(@Param("username") String username);
+    Usuario findById(long id);
+
+    Usuario findByCPF(String CPF);
+
+    Usuario findByEmail(String email);
+
+    Usuario findByNome(String nome);
+
+    <S extends Usuario> S save(S usuario);
+
+    void deleteById(Long id);
+
+    @Query("SELECT u FROM Usuario u WHERE u.nome = :nome")
+    public Usuario getUsuarioByNome(@Param("nome") String nome);
+
+    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    public Usuario getUsuarioByEmail(@Param("email") String email);
 }

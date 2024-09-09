@@ -20,18 +20,18 @@ public class UsuarioDetails implements UserDetails {
  
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getRole());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(usuario.getPapel());
         return Arrays.asList(authority);
     }
  
     @Override
     public String getPassword() {
-        return usuario.getPassword();
+        return usuario.getSenha();
     }
  
     @Override
     public String getUsername() {
-        return usuario.getUsername();
+        return usuario.getNome();
     }
  
     @Override

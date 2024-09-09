@@ -1,44 +1,51 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.List;
-
+import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "profissionais")
-public class Profissional extends AbstractEntity<Long> {
-
-    @NotBlank
-    @Email
-    @Column(nullable = false, unique = true, length = 255)
-    private String email;
-
-    @NotBlank
-    @Size(min = 11, max = 11)
-    @Column(nullable = false, unique = true, length = 11)
-    private String cpf;
-
-    @NotBlank
-    @Size(min = 1, max = 255)
-    @Column(nullable = false, length = 255)
-    private String nome;
+@Table(name = "Profissional")
+public class Profissional extends Usuario {
 
     @NotBlank
     @Size(min = 1, max = 255)
     @Column(nullable = false, length = 255)
     private String especialidade;
 
-    @Column(nullable = true, length = 500)
-    private String qualificacoes;
-
-    @OneToMany(mappedBy = "profissional")
-    private List<Consulta> consultas;
+    @Lob
+    @Basic
+    @Column(length = 10485760) // 1MB
+    private byte[] qualificacao;
 
     // Getters e Setters
+
+    public Profissional() {
+    }
+
+    public Profissional(String nome, String email, String CPF, String senha, String papel, String especialidade, byte[] qualificacao) {
+        super(nome, email, CPF, senha, papel);
+        this.especialidade = especialidade;
+        this.qualificacao = qualificacao;
+    }
+
+    public String getEspecialidade() {
+        return especialidade;
+    }
+
+    public void setEspecialidade(String especialidade) {
+        this.especialidade = especialidade;
+    }
+
+    public byte[] getQualificacao() {
+        return qualificacao;
+    }
+
+    public void setQualificacao(byte[] qualificacao) {
+        this.qualificacao = qualificacao;
+    }
 }

@@ -2,83 +2,94 @@ package br.ufscar.dc.dsw.domain;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
+@Inheritance(strategy = InheritanceType.JOINED) // Utilizando a estratégia JOINED para herança
 public class Usuario extends AbstractEntity<Long> {
-  
-	@NotBlank
-    @Column(nullable = false, length = 20, unique = true)
-    private String username;
-    
-	@NotBlank
-    @Column(nullable = false, length = 64)
-    private String password;
-       
-    @NotBlank
-    @Column(nullable = false, length = 60)
-    private String name;
-    
-    @NotBlank
-    @Column(nullable = false, length = 14)
+
+    @NotBlank(message = "{NotBlank.usuario.nome}")
+    @Size(max = 60)
+    @Column(nullable = false,unique = true, length = 60)
+    private String nome;
+
+    @NotBlank(message = "{NotBlank.usuario.email}")
+    @Email
+    @Size(max = 60)
+    @Column(nullable = false, unique = true, length = 60)
+    private String email;
+
+    @NotBlank(message = "{NotBlank.usuario.CPF}")
+    @Size(min = 14, max = 14, message = "{Size.usuario.CPF}")
+    @Column(nullable = false, unique = true, length = 14)
     private String CPF;
-    
-    @NotBlank
-    @Column(nullable = false, length = 10)
-    private String role;
-    
-    @Column(nullable = false)
-    private boolean enabled;
-		
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getPassword() {
-		return password;
-	}
-	
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
-	public String getCPF() {
-		return CPF;
-	}
 
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
+    @NotBlank(message = "{NotBlank.usuario.senha}")
+    @Size(min = 5, message = "{Size.usuario.senha}")
+    @Column(nullable = false, length = 255)
+    private String senha;
 
-	public String getRole() {
-		return role;
-	}
-	
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	public boolean isEnabled() {
-		return enabled;
-	}
-	
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
+    @Size(max = 20)
+    @Column(nullable = false, length = 15)
+    private String papel;
+
+    
+    public Usuario() {
+    }
+
+    public Usuario(String nome, String email, String CPF, String senha, String papel) {
+        this.nome = nome;
+        this.email = email;
+        this.CPF = CPF;
+        this.senha = senha;
+        this.papel = papel;
+    }
+
+    // Getters e Setters
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCPF() {
+        return CPF;
+    }
+
+    public void setCPF(String CPF) {
+        this.CPF = CPF;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getPapel() {
+        return papel;
+    }
+
+    public void setPapel(String papel) {
+        this.papel = papel;
+    }
 }

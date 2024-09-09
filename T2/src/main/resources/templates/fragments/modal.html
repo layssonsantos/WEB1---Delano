@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<!-- CONFIRM MODAL -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal" th:fragment="modal">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Atenção</h5> <!-- h5 em vez de h4 para título em modais no Bootstrap 5 -->
+				</div>
+				<div class="modal-body">
+					<p>Clique em OK para proceder com a exclusão</p>
+				</div>
+				<div class="modal-footer">
+					<!-- Botão de cancelar -->
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<!-- Botão de confirmação -->
+					<button id="ok_confirm" type="button" class="btn btn-primary">OK</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+
+</body>
+
+</html>
