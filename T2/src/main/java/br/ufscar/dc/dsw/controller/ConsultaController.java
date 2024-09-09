@@ -98,10 +98,10 @@ public class ConsultaController {
             from.setPersonal("Gerenciador Academico", "UTF-8");
 
             toCliente.setAddress(emailCliente);
-            toCliente.setPersonal(consulta.getCliente().getNome());
+            toCliente.setPersonal(consulta.getCliente().getNome(), "UTF-8");
 
             toProfissional.setAddress(emailProfissional);
-            toProfissional.setPersonal(consulta.getProfissional().getNome());
+            toProfissional.setPersonal(consulta.getProfissional().getNome(), "UTF-8");
             
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

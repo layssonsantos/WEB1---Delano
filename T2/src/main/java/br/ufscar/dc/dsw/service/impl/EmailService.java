@@ -69,11 +69,24 @@ public class EmailService implements IEmailService {
             Transport.send(message);
 
             System.out.println("Mensagem enviada com sucesso!");
-
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             System.out.println("Mensagem não enviada!");
+            System.out.println("Dados da mensagem não enviada:");
+            System.out.println("De: " + from);
+            System.out.println("Para: " + to);
+            System.out.println("Assunto: " + subject);
+            System.out.println("Corpo: " + body);
+        
+            if (file != null) {
+                System.out.println("Anexo: " + file.getAbsolutePath());
+            } else {
+                System.out.println("Anexo: Nenhum");
+            }
+        
             e.printStackTrace();
         }
+            
     }
 
     @Override
