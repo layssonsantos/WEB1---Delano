@@ -27,11 +27,31 @@ Desenvolvimento do T2  (Trabalho 2)
   - Bootstrap
 
 ## Usuários populados:
-- Clientes:
 - Administrador:
+  - login: admin@admin.com
+  - senha: admin
+- Clientes:
+  - Cliente (1):
+    - login: maria@exemple.com
+    - senha: 12345678
+  - Cliente (2):
+    - login: joao.santos@example.com
+    - senha: 87654321
+  - Cliente (3):
+    - login: ana.souza@example.com
+    - senha: 45678912
 - Profissionais:
+  - Profissional (1):
+    - login: ana.silva@example.com
+    - senha: 12345678
+  - Profissional (2):
+    - login: joao.souza@example.com
+    - senha: 87654321
+  - Profissional (3):
+    - login: carla.rodrigues@example.com
+    - senha: 45678912
   
-# Checklist dos requisitos (R1-R8):
+# Checklist dos requisitos (R1-R9):
 
 ## R1: CRUD 1 de clientes (requer login de administrador):
 ```
