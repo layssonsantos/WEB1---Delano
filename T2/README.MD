@@ -3,6 +3,8 @@ Desenvolvimento do T2  (Trabalho 2)
 
 # Projeto de Sistema para agendamento de consultas online com profissionais
 
+## Arquitetura: Modelo-Visão-Controlador
+
 ## Funcionalidades
 - Cadastro e Listagem de Clientes
 - Cadastro e Listagem de Profissionais Liberais
@@ -12,27 +14,22 @@ Desenvolvimento do T2  (Trabalho 2)
 - Upload de Arquivos
 - Validação de campos
 - Internacionalização
-  
+
 ## Tecnologias Utilizadas
 - Lado Servidor
   - Java com **Spring Boot**
-- Java com **Spring Boot**
-- **Spring Data JPA** para integração com o banco de dados MySQL
-- **Thymeleaf** para renderização de páginas dinâmicas
-- **Spring Security** para controle de autenticação e autorização.
-- Javascript (Lado Cliente)
-- CSS
-- Servlets
-- JSP
-- JSTL
-- JDBC
-- MySQL
+  - **Spring Data JPA** para integração com o banco de dados MySQL
+  - **Thymeleaf** para renderização de páginas dinâmicas
+  - **Spring Security** para controle de autenticação e autorização
+- Lado Cliente
+  - Javascript
+  - CSS
+  - Bootstrap
 
-## Roteiro de execução:
-- SGBD: **MySQL**
-- Nome do Banco de Dados: **OASS**
-- Script sql: **source db\MySQL\create.sql**
-- Usuários populados: **Admin, Cliente, Profissional e Ambos**
+## Usuários populados:
+- Clientes:
+- Administrador:
+- Profissionais:
   
 # Checklist dos requisitos (R1-R8):
 
