@@ -86,7 +86,7 @@ Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (
 ```
 ## R7: Listagem de todas as consultas de um profissional (requer login do profissional via e-mail + senha). Depois de fazer login, o profissional pode visualizar todos os horários de atendimento cadastrados:
 ```
-### (X) Implementado () Parcialmente implementado ( ) Não implementado
+(X) Implementado () Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ```
 ## R8: O sistema deve ser internacionalizado em pelo menos dois idiomas: português + outro de sua escolha:
