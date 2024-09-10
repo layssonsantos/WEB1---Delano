@@ -1,5 +1,5 @@
-# WEB1 - Equipe 4
-Repositório para o desenvolvimento de atividades e projetos na disciplina DSW1 (Desenvolvimento de Software para Web 1) com o professor Delano.
+# WEB1 - T1
+Desenvolvimento do T1  (Trabalho 1)
 
 # Projeto de Sistema para agendamento de consultas online com profissionais
 
