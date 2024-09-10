@@ -75,6 +75,7 @@ Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
 ```
 ## R9: O sistema deve validar (tamanho, formato, etc) todas as informações (campos nos formulários) cadastradas e/ou editadas:
+```
 () Implementado (X) Parcialmente implementado ( ) Não implementado
 Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (33%), Laysson Santos da Silva (33%) e Gabriel Henrique Alves Zago (33%)
-```
+
