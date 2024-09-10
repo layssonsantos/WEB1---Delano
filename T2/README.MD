@@ -5,16 +5,6 @@ Desenvolvimento do T2  (Trabalho 2)
 
 ## Arquitetura: Modelo-Visão-Controlador
 
-## Funcionalidades
-- Cadastro e Listagem de Clientes
-- Cadastro e Listagem de Profissionais Liberais
-- Login de Usuários (Cliente e Profissional)
-- Cadastro e Listagem de Consultas
-- Consulta via e-mail
-- Upload de Arquivos
-- Validação de campos
-- Internacionalização
-
 ## Tecnologias Utilizadas
 - Lado Servidor
   - Java com **Spring Boot**
@@ -25,6 +15,16 @@ Desenvolvimento do T2  (Trabalho 2)
   - Javascript
   - CSS
   - Bootstrap
+
+## Funcionalidades
+- Cadastro e Listagem de Clientes
+- Cadastro e Listagem de Profissionais Liberais
+- Login de Usuários (Cliente e Profissional)
+- Cadastro e Listagem de Consultas
+- Consulta via e-mail
+- Upload de Arquivos
+- Validação de campos
+- Internacionalização
 
 ## Usuários populados:
 - Administrador:
