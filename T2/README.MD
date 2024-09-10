@@ -4,15 +4,23 @@ Desenvolvimento do T2  (Trabalho 2)
 # Projeto de Sistema para agendamento de consultas online com profissionais
 
 ## Funcionalidades
-- Cadastro de Usuários (Clientes e Profissionais)
-- Login de Usuários
-- Cadastro de Consultas
-- Listagem de Consultas
+- Cadastro e Listagem de Clientes
+- Cadastro e Listagem de Profissionais Liberais
+- Login de Usuários (Cliente e Profissional)
+- Cadastro e Listagem de Consultas
+- Consulta via e-mail
 - Upload de Arquivos
+- Validação de campos
+- Internacionalização
   
 ## Tecnologias Utilizadas
-- Java
-- Javascript
+- Lado Servidor
+  - Java com **Spring Boot**
+- Java com **Spring Boot**
+- **Spring Data JPA** para integração com o banco de dados MySQL
+- **Thymeleaf** para renderização de páginas dinâmicas
+- **Spring Security** para controle de autenticação e autorização.
+- Javascript (Lado Cliente)
 - CSS
 - Servlets
 - JSP
