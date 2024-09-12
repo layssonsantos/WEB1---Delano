@@ -50,8 +50,9 @@ public class WebSecurityConfig {
                         .requestMatchers("/usuarios/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/pesquisar").permitAll()
-                        .anyRequest().authenticated()
-        )
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated())
+        .csrf(AbstractHttpConfigurer::disable)
         .formLogin(formLogin ->
                 formLogin
                         .loginPage("/login")
