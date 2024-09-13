@@ -57,7 +57,7 @@ Este projeto é um sistema para agendamento de consultas online entre clientes e
   - Spring MVC (Controladores REST), Spring Data JPA, Spring Security & Thymeleaf (Lado
   Servidor)
   
-# Checklist dos requisitos (R1-R9):
+# Checklist dos requisitos (R1-R3):
 
 ## R1: CRUD de Clientes via REST API:
 > A API permite criar, listar, editar e excluir clientes do sistema por meio de endpoints HTTP.
