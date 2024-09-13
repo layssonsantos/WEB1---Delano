@@ -59,16 +59,26 @@ public class ClienteRestController {
         if (result.hasErrors()) {
             return ResponseEntity.badRequest().body(null);
         } else {
-            Cliente c = service.buscarPorId(id);
-            if (c == null) {
+            // Buscar o cliente existente no banco de dados
+            Cliente clienteExistente = service.buscarPorId(id);
+            if (clienteExistente == null) {
                 return ResponseEntity.notFound().build();
             } else {
+                // Garantir que o CPF não seja alterado
+                if (!clienteExistente.getCPF().equals(cliente.getCPF())) {
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null); // CPF não pode ser modificado
+                }
+    
+                // Atualizar as demais informações do cliente
                 cliente.setId(id);
+                cliente.setCPF(clienteExistente.getCPF()); // Garante que o CPF seja mantido
+    
                 service.salvar(cliente);
                 return ResponseEntity.ok(cliente);
             }
         }
     }
+    
 
     @DeleteMapping(path = "/api/clientes/{id}")
     public ResponseEntity<Boolean> remove(@PathVariable("id") long id) {
