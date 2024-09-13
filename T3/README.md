@@ -1,4 +1,4 @@
-# WEB1 - T3
+# WEB1 - T3 REST API
 Desenvolvimento do T3  (Trabalho 3)
 
 # Projeto de Sistema para agendamento de consultas online com profissionais
