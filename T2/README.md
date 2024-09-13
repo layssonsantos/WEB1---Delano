@@ -1,4 +1,4 @@
-# WEB1 - T2
+# WEB1 - T2 CRUD
 Desenvolvimento do T2  (Trabalho 2)
 
 # Projeto de Sistema para agendamento de consultas online com profissionais
