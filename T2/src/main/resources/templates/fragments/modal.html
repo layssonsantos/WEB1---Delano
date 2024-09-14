@@ -11,14 +11,14 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title">Atenção</h5> <!-- h5 em vez de h4 para título em modais no Bootstrap 5 -->
+					<h5 class="modal-title" th:text="#{modal.atencao}">Atenção</h5> <!-- h5 em vez de h4 para título em modais no Bootstrap 5 -->
 				</div>
 				<div class="modal-body">
-					<p>Clique em OK para proceder com a exclusão</p>
+					<p th:text="#{modal.exclusao}">Clique em OK para proceder com a exclusão</p>
 				</div>
 				<div class="modal-footer">
 					<!-- Botão de cancelar -->
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{modal.cancelar}">Cancelar</button>
 					<!-- Botão de confirmação -->
 					<button id="ok_confirm" type="button" class="btn btn-primary">OK</button>
 				</div>
