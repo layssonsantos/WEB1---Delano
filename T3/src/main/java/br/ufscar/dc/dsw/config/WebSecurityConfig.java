@@ -37,8 +37,9 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
+        http
+                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/error", "/login/**", "/js/**").permitAll()
                         .requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
                         .requestMatchers("/consultas/cadastrarConsulta").hasAnyRole("CLIENTE", "PROFISSIONAL")
@@ -50,18 +51,14 @@ public class WebSecurityConfig {
                         .requestMatchers("/usuarios/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/pesquisar").permitAll()
-                        .anyRequest().authenticated()
-        )
-        .formLogin(formLogin ->
-                formLogin
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .permitAll()
-        )
-        .logout(logout ->
-                logout
+                        .permitAll())
+                .logout(logout -> logout
                         .logoutSuccessUrl("/")
-                        .permitAll()
-        );
+                        .permitAll());
 
         return http.build();
     }
