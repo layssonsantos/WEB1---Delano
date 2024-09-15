@@ -34,7 +34,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="cliente">Cliente</label>
-                        <select id="cliente" class="form-control" th:field="*{cliente.id}"
+                        <select id="cliente" class="form-control" th:field="*{cliente}"
                             th:classappend="${#fields.hasErrors('cliente')} ? is-invalid">
                             <option value="">Selecione</option>
                             <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}">
@@ -49,7 +49,7 @@
 
                     <div class="form-group col-md-6">
                         <label for="profissional">Profissional</label>
-                        <select id="profissional" class="form-control" th:field="*{profissional.id}"
+                        <select id="profissional" class="form-control" th:field="*{profissional}"
                             th:classappend="${#fields.hasErrors('profissional')} ? is-invalid">
                             <option value="">Selecione</option>
                             <option th:each="profissional : ${profissionais}" th:value="${profissional.id}"
