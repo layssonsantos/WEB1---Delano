@@ -13,12 +13,11 @@
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                        <span>Cadastrar Consulta</span>
-                    </li>
+                        <span th:text="#{consulta.cadastrar}">Cadastrar Consulta</span></li>
                 </ul>
-                <a class="btn btn-primary btn-md" th:href="@{/consultas/listar}" role="button"> <span
-                        class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> <span>Listar
-                        Consultas</span>
+                <a class="btn btn-primary btn-md" th:href="@{/consultas/listar}"
+                    role="button"> <span class="oi oi-spreadsheet" title="Listar"
+                    aria-hidden="true"></span> <span th:text="#{cadastro.listar}">Listar Consultas</span>
                 </a>
             </div>
         </nav>
@@ -33,12 +32,12 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        <label for="cliente">Cliente</label>
-                        <select id="cliente" class="form-control" th:field="*{cliente}"
+                        <label for="cliente" th:text="#{consulta.cliente}">Cliente</label>
+                        <select id="cliente" class="form-control" th:field="*{cliente.id}"
                             th:classappend="${#fields.hasErrors('cliente')} ? is-invalid">
-                            <option value="">Selecione</option>
-                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}" th:text="${cliente.nome}">
-                            </option>
+                            <option value="" th:text="#{cadastro.selecione}">Selecione</option>
+                            <option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+                                th:text="${cliente.nome}"></option>
                         </select>
 
                         <div class="invalid-feedback">
@@ -48,10 +47,10 @@
 
 
                     <div class="form-group col-md-6">
-                        <label for="profissional">Profissional</label>
-                        <select id="profissional" class="form-control" th:field="*{profissional}"
+                        <label for="profissional" th:text="#{consulta.profissional}">Profissional</label>
+                        <select id="profissional" class="form-control" th:field="*{profissional.id}"
                             th:classappend="${#fields.hasErrors('profissional')} ? is-invalid">
-                            <option value="">Selecione</option>
+                            <option value="" th:text="#{cadastro.selecione}">Selecione</option>
                             <option th:each="profissional : ${profissionais}" th:value="${profissional.id}"
                                 th:text="${profissional.nome}"></option>
                         </select>
@@ -62,9 +61,11 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="dataHora">Data e Hora</label>
-                        <input type="datetime-local" class="form-control" id="dataHora" th:field="*{dataHora}"
-                            th:classappend="${#fields.hasErrors('dataHora')} ? is-invalid" step="3600" />
+                        <label for="dataHora" th:text="#{consulta.data}">Data e Hora</label>
+                        <input type="datetime-local" class="form-control" id="dataHora"
+                            th:field="*{dataHora}"
+                            th:classappend="${#fields.hasErrors('dataHora')} ? is-invalid"
+                            step="3600" />
 
                         <div class="invalid-feedback">
                             <span th:errors="*{dataHora}"></span>
@@ -73,7 +74,7 @@
                 </div>
 
                 <input type="hidden" id="id" th:field="*{id}" />
-                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                <button type="submit" class="btn btn-primary btn-sm" th:text="#{cadastro.salvar}">Salvar</button>
             </form>
         </div>
     </section>

@@ -13,11 +13,11 @@
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active"><i class="oi oi-caret-right"></i>
-                            <span>Cadastrar Profissionais</span>
+                            <span th:text="#{profissional.cadastrar}">Cadastrar Profissionais</span>
                         </li>
                     </ul>
                     <a class="btn btn-primary btn-md" th:href="@{/profissionais/listar}" role="button"> <span
-                            class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> <span>Listar
+                            class="oi oi-spreadsheet" title="Listar" aria-hidden="true"></span> <span th:text="#{cadastro.listar}">Listar
                             Profissionais</span>
                     </a>
                 </div>
@@ -33,8 +33,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="nome">Nome</label>
-                        <input type="text" class="form-control" id="nome" placeholder="Nome" autofocus="autofocus"
+                        <label for="nome" th:text="#{profissional.nome}">Nome</label>
+                        <input type="text" class="form-control" id="nome" th:placeholder="#{profissional.nome}" autofocus="autofocus"
                             th:field="*{nome}" th:classappend="${#fields.hasErrors('nome')} ? is-invalid" />
 
                         <div class="invalid-feedback">
@@ -65,8 +65,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="especialidade">Especialidade</label>
-                        <input type="text" class="form-control" id="especialidade" placeholder="Especialidade"
+                        <label for="especialidade" th:text="#{profissional.especialidade}">Especialidade</label>
+                        <input type="text" class="form-control" id="especialidade" th:placeholder="#{profissional.especialidade}"
                             th:field="*{especialidade}"
                             th:classappend="${#fields.hasErrors('especialidade')} ? is-invalid" />
 
@@ -76,8 +76,8 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="senha">Senha</label>
-                        <input type="text" class="form-control" id="senha" placeholder="Senha" th:field="*{senha}"
+                        <label for="senha" th:text="#{cadastro.senha}">Senha</label>
+                        <input type="text" class="form-control" id="senha" th:placeholder="#{cadastro.senha}" th:field="*{senha}"
                             th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
 
                         <div class="invalid-feedback">
@@ -91,13 +91,13 @@
                     </div>
 
                     <div class="form-group col-md-6">
-                        <label for="qualificacao">Qualificação (PDF, DOC, etc.)</label>
+                        <label for="qualificacao" th:text="#{profissional.qualificacao.pdf}">Qualificação (PDF, DOC, etc.)</label>
                         <input type="file" class="form-control-file" name="file" accept=".pdf, .doc, .docx, .odt" />
                     </div>
                 </div>
 
                 <input type="hidden" id="id" th:field="*{id}" />
-                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                <button type="submit" class="btn btn-primary btn-sm" th:text="#{cadastro.salvar}">Salvar</button>
             </form>
         </div>
     </section>
