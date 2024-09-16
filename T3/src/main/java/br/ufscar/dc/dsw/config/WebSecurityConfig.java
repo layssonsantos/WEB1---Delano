@@ -38,14 +38,14 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
+                
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/error", "/login/**", "/js/**").permitAll()
                         .requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
                         .requestMatchers("/consultas/cadastrarConsulta").hasAnyRole("CLIENTE", "PROFISSIONAL")
                         .requestMatchers("/consultas/minhasConsultas").hasAnyRole("CLIENTE", "PROFISSIONAL")
-                        .requestMatchers("/consultas/salvar").hasAnyRole("CLIENTE", "PROFISSIONAL")
                         .requestMatchers("/consultas/**").hasRole("ADMIN")
+                        .requestMatchers("/consultas/salvar").hasAnyRole("CLIENTE", "PROFISSIONAL")
                         .requestMatchers("/profissionais/**").hasAnyRole("ADMIN", "PROFISSIONAL")
                         .requestMatchers("/clientes/**").hasAnyRole("ADMIN", "CLIENTE")
                         .requestMatchers("/usuarios/**").hasAnyRole("ADMIN", "USER")
@@ -53,6 +53,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/pesquisar").permitAll()
                         .requestMatchers("/api/**").permitAll()
                         .anyRequest().authenticated())
+                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
                 .formLogin(formLogin -> formLogin
                         .loginPage("/login")
                         .permitAll())
