@@ -46,7 +46,7 @@ public class ConsultaRestController {
     @PostMapping(path = "/api/consultas")
     @ResponseBody
     public ResponseEntity<Consulta> cria(@Valid @RequestBody Consulta consulta, BindingResult result) {
-        if (result.hasErrors()) {
+        if (result.hasErrors() || service.existeConflito(consulta)) {
             return ResponseEntity.badRequest().body(null);
         } else {
             service.salvar(consulta);

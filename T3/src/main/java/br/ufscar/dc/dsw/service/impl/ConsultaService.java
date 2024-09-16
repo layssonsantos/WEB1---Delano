@@ -44,6 +44,13 @@ public class ConsultaService implements IConsultaService {
     @Transactional(readOnly = true)
     public boolean existeConflito(Consulta consulta) {
         List<Consulta> consultas = dao.findByProfissionalAndDataHora(consulta.getProfissional(), consulta.getDataHora());
-        return !consultas.isEmpty();
+        List<Consulta> consultas2 = dao.findByClienteAndDataHora(consulta.getCliente(), consulta.getDataHora());
+        if(!consultas.isEmpty()){
+            return true;
+        }
+        if(!consultas2.isEmpty()){
+            return true;
+        }
+        return false;
     }
 }
