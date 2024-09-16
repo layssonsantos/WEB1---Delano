@@ -2,22 +2,22 @@
 <html layout:decorate="~{layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Escolha de Cadastro</title>
+    <title th:text="#{usuario.escolha}">Escolha de Cadastro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
     <section class="layout-content" layout:fragment="corpo">
         <div class="container mt-5">
-            <h2>Como deseja se cadastrar?</h2>
-            <p>Escolha uma opção abaixo para continuar:</p>
+            <h2 th:text="#{usuario.deseja}">Como deseja se cadastrar?</h2>
+            <p th:text="#{usuario.escolha.2}">Escolha uma opção abaixo para continuar:</p>
             
             <!-- Botões de escolha de cadastro -->
             <div class="row mt-4">
                 <div class="col-md-6">
-                    <a href="/clientes/cadastrar" class="btn btn-primary btn-lg btn-block">Cadastrar como Cliente</a>
+                    <a href="/clientes/cadastrar" class="btn btn-primary btn-lg btn-block" th:text="#{usuario.cliente}">Cadastrar como Cliente</a>
                 </div>
                 <div class="col-md-6">
-                    <a href="/profissionais/cadastrar" class="btn btn-secondary btn-lg btn-block">Cadastrar como Profissional</a>
+                    <a href="/profissionais/cadastrar" class="btn btn-secondary btn-lg btn-block" th:text="#{usuario.profissional}">Cadastrar como Profissional</a>
                 </div>
             </div>
         </div>

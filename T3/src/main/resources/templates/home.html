@@ -9,16 +9,16 @@
     <section class="layout-content" layout:fragment="corpo">
 
         <div class="container" style="text-align: center;">
-            <h1>Bem-vindo ao sistema OASS</h1>
+            <h1 th:text="#{home.bemvindo}">Bem-vindo ao sistema OASS</h1>
             <div class="container" id="listagem">
 
                 <!-- Formulário de Pesquisa por Especialidade -->
                 <form th:action="@{/pesquisar}" method="get" class="form-inline justify-content-center mb-4">
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="especialidade" class="sr-only">Especialidade</label>
-                        <input type="text" class="form-control" id="especialidade" name="especialidade" placeholder="Digite a especialidade">
+                        <label for="especialidade" class="sr-only" th:text="#{home.especialidade}">Especialidade</label>
+                        <input type="text" class="form-control" id="especialidade" name="especialidade" th:placeholder="#{home.digite}">
                     </div>
-                    <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+                    <button type="submit" class="btn btn-primary mb-2" th:text="#{home.pesquisar}">Pesquisar</button>
                 </form>
 
                 <div th:replace="~{fragments/alert}"></div>
@@ -28,11 +28,11 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Nome</th>
-                                <th>Email</th>
-                                <th>CPF</th>
-                                <th><a th:href="@{/?order=especialidade}">Especialidade</a></th>
-                                <th>Qualificação (PDF)</th>
+                                <th th:text="#{profissional.nome}"></th>
+                                <th th:text="#{profissional.email}">Email</th>
+                                <th th:text="#{profissional.cpf}">CPF</th>
+                                <th th:text="#{profissional.especialidade}"><a th:href="@{/?order=especialidade}">Especialidade</a></th>
+                                <th th:text="#{profissional.qualificacao}">Qualificação (PDF)</th>
                             </tr>
                         </thead>
                         <tbody>

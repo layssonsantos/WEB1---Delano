@@ -8,7 +8,6 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "Profissional")
 public class Profissional extends Usuario {
