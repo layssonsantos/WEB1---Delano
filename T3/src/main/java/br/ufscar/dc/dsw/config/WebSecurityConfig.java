@@ -37,31 +37,28 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
+        http
+                .csrf(csrf -> csrf.disable()) // Desabilita CSRF
+                .authorizeHttpRequests(authorizeRequests -> authorizeRequests
                         .requestMatchers("/error", "/login/**", "/js/**").permitAll()
                         .requestMatchers("/css/**", "/image/**", "/webjars/**").permitAll()
-                        .requestMatchers("/consultas/cadastrarConsulta").hasAnyRole("CLIENTE", "PROFISSIONAL", "ADMIN")
+                        .requestMatchers("/consultas/cadastrarConsulta").hasAnyRole("CLIENTE", "PROFISSIONAL")
                         .requestMatchers("/consultas/minhasConsultas").hasAnyRole("CLIENTE", "PROFISSIONAL")
-                        .requestMatchers("/consultas/salvar").hasAnyRole("CLIENTE", "PROFISSIONAL", "ADMIN")
+                        .requestMatchers("/consultas/salvar").hasAnyRole("CLIENTE", "PROFISSIONAL")
                         .requestMatchers("/consultas/**").hasRole("ADMIN")
                         .requestMatchers("/profissionais/**").hasAnyRole("ADMIN", "PROFISSIONAL")
                         .requestMatchers("/clientes/**").hasAnyRole("ADMIN", "CLIENTE")
                         .requestMatchers("/usuarios/**").hasAnyRole("ADMIN", "USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/pesquisar").permitAll()
-                        .anyRequest().authenticated()
-        )
-        .formLogin(formLogin ->
-                formLogin
+                        .requestMatchers("/api/**").permitAll()
+                        .anyRequest().authenticated())
+                .formLogin(formLogin -> formLogin
                         .loginPage("/login")
-                        .permitAll()
-        )
-        .logout(logout ->
-                logout
+                        .permitAll())
+                .logout(logout -> logout
                         .logoutSuccessUrl("/")
-                        .permitAll()
-        );
+                        .permitAll());
 
         return http.build();
     }
