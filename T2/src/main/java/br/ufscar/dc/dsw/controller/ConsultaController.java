@@ -1,6 +1,11 @@
 package br.ufscar.dc.dsw.controller;
 
 import jakarta.validation.Valid;
+
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.internet.InternetAddress;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import br.ufscar.dc.dsw.domain.Consulta;
 import br.ufscar.dc.dsw.service.spec.IConsultaService;
+import br.ufscar.dc.dsw.service.spec.IEmailService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IProfissionalService;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
@@ -33,10 +39,14 @@ public class ConsultaController {
     @Autowired
     private IProfissionalService profissionalService;
 
+    @Autowired
+    private IEmailService emailService;
+
     @GetMapping("/cadastrar")
-    public String cadastrar(Consulta consulta, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
-        model.addAttribute("clientes", clienteService.buscarTodosCampo(campo));
-        model.addAttribute("profissionais", profissionalService.buscarTodosCampo(campo));
+    public String cadastrar(Consulta consulta, ModelMap model,
+            @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
+        model.addAttribute("clientes", clienteService.buscarTodos());
+        model.addAttribute("profissionais", profissionalService.buscarTodos());
         return "consulta/cadastro";
     }
 
@@ -71,12 +81,43 @@ public class ConsultaController {
         }
 
         consultaService.salvar(consulta);
+
+        // Recuperando as informações de cliente e profissional
+        String emailCliente = consulta.getCliente().getEmail();
+        String emailProfissional = consulta.getProfissional().getEmail();
+        String assunto = "Confirmação de Consulta";
+        String corpoEmail = "Sua consulta foi agendada com sucesso!";
+
+        InternetAddress from = new InternetAddress();
+        InternetAddress toCliente = new InternetAddress();
+        InternetAddress toProfissional = new InternetAddress();
+
+        try {
+
+            from.setAddress("lucas.roberto@estudante.ufscar.br");
+            from.setPersonal("Gerenciador Academico", "UTF-8");
+
+            toCliente.setAddress(emailCliente);
+            toCliente.setPersonal(consulta.getCliente().getNome(), "UTF-8");
+
+            toProfissional.setAddress(emailProfissional);
+            toProfissional.setPersonal(consulta.getProfissional().getNome(), "UTF-8");
+            
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        
+
+        emailService.send(from, toCliente, assunto, corpoEmail);
+        emailService.send(from, toProfissional, assunto, corpoEmail);
+
         attr.addFlashAttribute("success", "Consulta agendada com sucesso.");
         return "redirect:/consultas/listar";
     }
 
     @GetMapping("/editar/{id}")
-    public String preEditar(@PathVariable("id") Long id, ModelMap model, @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
+    public String preEditar(@PathVariable("id") Long id, ModelMap model,
+            @RequestParam(required = false, name = "order", defaultValue = "id") String campo) {
         Consulta consulta = consultaService.buscarPorId(id);
         model.addAttribute("consulta", consulta);
         model.addAttribute("clientes", clienteService.buscarTodosCampo(campo));

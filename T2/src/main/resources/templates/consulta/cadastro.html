@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
+
 <head>
     <meta charset="UTF-8" />
 </head>
+
 <body>
 
     <section class="layout-content" layout:fragment="corpo">
-
+        
         <nav class="navbar navbar-expand-md bg-light">
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav mr-auto">
@@ -24,11 +26,11 @@
 
             <div th:replace="~{fragments/alert}"></div>
 
-            <form
-                th:action="${consulta.id == null} ? @{/consultas/salvar} : @{/consultas/editar}"
+            <form th:action="${consulta.id == null} ? @{/consultas/salvar} : @{/consultas/editar}"
                 th:object="${consulta}" method="POST">
 
                 <div class="form-row">
+
                     <div class="form-group col-md-6">
                         <label for="cliente" th:text="#{consulta.cliente}">Cliente</label>
                         <select id="cliente" class="form-control" th:field="*{cliente.id}"
@@ -42,6 +44,7 @@
                             <span th:errors="*{cliente}"></span>
                         </div>
                     </div>
+
 
                     <div class="form-group col-md-6">
                         <label for="profissional" th:text="#{consulta.profissional}">Profissional</label>
@@ -76,4 +79,5 @@
         </div>
     </section>
 </body>
+
 </html>
