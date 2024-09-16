@@ -28,15 +28,30 @@ Este projeto é um sistema para agendamento de consultas online entre clientes e
   - **GET** _/api/consultas/profissionais/{id}_: Retorna a lista de consultas de um profissional específico.
 
 
-## Usuários populados
+## Usuários populados:
 - Administrador:
   - login: admin@admin.com
   - senha: admin
-	@@ -52,28 +50,52 @@ Este projeto é um sistema para agendamento de consultas online entre clientes e
+- Clientes:
+  - Cliente (1):
+    - login: maria@exemple.com
+    - senha: 12345678
+  - Cliente (2):
+    - login: joao.santos@example.com
+    - senha: 87654321
+  - Cliente (3):
+    - login: ana.souza@example.com
+    - senha: 45678912
+- Profissionais:
+  - Profissional (1):
+    - login: ana.silva@example.com
+    - senha: 12345678
+  - Profissional (2):
+    - login: joao.souza@example.com
+    - senha: 87654321
   - Profissional (3):
     - login: carla.rodrigues@example.com
     - senha: 45678912
-
 ## Tecnologias Utilizadas
   - Spring MVC (Controladores REST), Spring Data JPA, Spring Security & Thymeleaf (Lado
   Servidor)
