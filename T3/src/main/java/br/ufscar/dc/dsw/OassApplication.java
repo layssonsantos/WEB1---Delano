@@ -35,7 +35,7 @@ public class OassApplication {
 			
 
 			// Criando clientes
-			Cliente cliente1 = new Cliente("Maria Eduarda", "maria@exemple.com", "133.456.789-00", encoder.encode("12345678"), 
+			Cliente cliente1 = new Cliente("Maria Eduarda", "daniel.sobrinho0017@gmail.com", "133.456.789-00", encoder.encode("12345678"), 
 			"ROLE_CLIENTE", "(11) 98765-4321", "Feminino", new SimpleDateFormat("dd/MM/yyyy").parse("15/03/1985"));
 			clienteDAO.save(cliente1);
 
@@ -48,7 +48,7 @@ public class OassApplication {
 			clienteDAO.save(cliente3);
 
 			// Criando profissionais
-			Profissional p1 = new Profissional("Ana Maria Silva", "ana.silva@example.com", "124.456.789-00", encoder.encode("12345678"),
+			Profissional p1 = new Profissional("Ana Maria Silva", "lucas.roberto@estudante.ufscar.br", "124.456.789-00", encoder.encode("12345678"),
 			"ROLE_PROFISSIONAL", "Cardiologia", Files.readAllBytes(Path.of("ana_silva_qualificacao.pdf")));
 			profissionalDAO.save(p1);
 
