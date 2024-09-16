@@ -68,10 +68,10 @@ Divisão na implementação da funcionalidade: Laysson Santos da Silva (100%)
 > A API permite criar, listar, editar e excluir profissionais do sistema por meio de endpoints HTTP.
 ```
 (X) Implementado () Parcialmente implementado ( ) Não implementado
-Divisão na implementação da funcionalidade: 
+Divisão na implementação da funcionalidade: Laysson Santos da Silva (50%) e Lucas Roberto da Silva (50%)
 ```
 ## R3: CRUD de Consultas via REST API:
 > A API permite listar consultas agendadas por clientes com profissionais via endpoints HTTP.
 ```
 (X) Implementado ( ) Parcialmente implementado ( ) Não implementado
-Divisão na implementação da funcionalidade: 
+Divisão na implementação da funcionalidade: Daniel de Souza Sobrinho Macedo (50%) e Gabriel Henrique Alves Zago (50%)
